@@ -1,0 +1,4999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Connect — Your People. Your Interests. Your Campus.</title>
+  <meta name="description" content="Campus Connect helps college students find friends, discover shared interests, join communities, ask academic questions, and participate in campus activities.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       1. CSS VARIABLES & THEME SETUP
+       ========================================================================== */
+    :root {
+      --navy-950: #070d18;
+      --navy-900: #0b1329;
+      --navy-850: #101c3d;
+      --navy-800: #16244f;
+      --navy-700: #1f326b;
+      --navy-600: #29428b;
+      
+      --indigo-600: #4f46e5;
+      --indigo-500: #6366f1;
+      --indigo-400: #818cf8;
+      --indigo-100: #e0e7ff;
+      --indigo-50: #eef2ff;
+
+      --violet-600: #7c3aed;
+      --violet-500: #8b5cf6;
+      --violet-400: #a78bfa;
+      --violet-100: #ede9fe;
+      --violet-50: #f5f3ff;
+
+      --emerald-500: #10b981;
+      --emerald-100: #d1fae5;
+      --emerald-50: #ecfdf5;
+
+      --amber-500: #f59e0b;
+      --amber-100: #fef3c7;
+      
+      --rose-500: #f43f5e;
+      --rose-100: #ffe4e6;
+
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(11, 19, 41, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(11, 19, 41, 0.08), 0 2px 4px -2px rgba(11, 19, 41, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(11, 19, 41, 0.09), 0 4px 6px -4px rgba(11, 19, 41, 0.04);
+      --shadow-xl: 0 20px 25px -5px rgba(11, 19, 41, 0.12), 0 8px 10px -6px rgba(11, 19, 41, 0.06);
+      --shadow-indigo: 0 10px 25px -5px rgba(79, 70, 229, 0.35);
+
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+      transition: all var(--transition-fast);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--indigo-500);
+      outline-offset: 2px;
+    }
+
+    input, select, textarea {
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    img, svg {
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    /* Container Utility */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION BAR
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 19, 41, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--white);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .brand-icon-wrapper {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--indigo-500), var(--violet-500));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--slate-300);
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-link:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-link.active {
+      color: var(--white);
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.6), rgba(124, 58, 237, 0.6));
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-full);
+      padding: 0.3rem 0.85rem 0.3rem 0.35rem;
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-profile-badge:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .avatar-sm {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(7, 13, 24, 0.7);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .mobile-drawer.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-drawer-content {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 300px;
+      background: var(--navy-900);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform var(--transition-normal);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .mobile-drawer.open .mobile-drawer-content {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .drawer-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .drawer-nav-list .nav-link {
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      width: 100%;
+      border-radius: var(--radius-md);
+    }
+
+    /* ==========================================================================
+       4. BUTTONS & UI CONTROLS
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.925rem;
+      font-weight: 600;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-md);
+      transition: all var(--transition-normal);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--indigo-600), var(--violet-600));
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #4338ca, #6d28d9);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--indigo-600);
+      border: 1.5px solid var(--indigo-600);
+    }
+
+    .btn-outline:hover {
+      background: var(--indigo-50);
+      color: var(--indigo-700);
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--navy-900);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-white:hover {
+      background: var(--slate-100);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.85rem;
+      font-size: 0.825rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-joined {
+      background: var(--emerald-50) !important;
+      color: var(--emerald-500) !important;
+      border: 1.5px solid var(--emerald-500) !important;
+    }
+
+    .btn-joined:hover {
+      background: #fee2e2 !important;
+      color: var(--rose-500) !important;
+      border-color: var(--rose-500) !important;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .badge-indigo { background: var(--indigo-100); color: var(--indigo-600); }
+    .badge-violet { background: var(--violet-100); color: var(--violet-600); }
+    .badge-emerald { background: var(--emerald-100); color: #047857; }
+    .badge-amber { background: var(--amber-100); color: #b45309; }
+    .badge-rose { background: var(--rose-100); color: #be123c; }
+    .badge-slate { background: var(--slate-200); color: var(--slate-700); }
+
+    /* ==========================================================================
+       5. MAIN APP VIEW CONTAINER
+       ========================================================================== */
+    .app-main {
+      flex: 1;
+      position: relative;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.25s ease forwards;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Page Headings */
+    .view-header {
+      margin-bottom: 2rem;
+    }
+
+    .view-title {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .view-subtitle {
+      color: var(--slate-500);
+      font-size: 1.05rem;
+      margin-top: 0.4rem;
+    }
+
+    /* ==========================================================================
+       6. LANDING PAGE VIEW
+       ========================================================================== */
+    .hero-section {
+      background: radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.25) 0%, transparent 50%),
+                  radial-gradient(circle at 20% 80%, rgba(79, 70, 229, 0.3) 0%, transparent 50%),
+                  var(--navy-950);
+      color: var(--white);
+      padding: 5rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-full);
+      padding: 0.35rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--indigo-100);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald-500);
+      box-shadow: 0 0 10px var(--emerald-500);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title-highlight {
+      background: linear-gradient(135deg, #a5b4fc, #c084fc, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: var(--slate-300);
+      margin-bottom: 2.25rem;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-meta-stats {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .meta-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-stat-val {
+      font-size: 1.35rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      color: var(--white);
+    }
+
+    .meta-stat-label {
+      font-size: 0.8rem;
+      color: var(--slate-400);
+    }
+
+    /* CSS Hero Illustration Card Cluster */
+    .hero-visual-card {
+      position: relative;
+      background: rgba(22, 36, 79, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-visual-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .active-pulse-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+    }
+
+    .bubble-card {
+      background: rgba(11, 19, 41, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.15rem;
+      margin-bottom: 1rem;
+      transition: transform var(--transition-normal);
+    }
+
+    .bubble-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(129, 140, 248, 0.4);
+    }
+
+    .bubble-top {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .bubble-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #4f46e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--white);
+    }
+
+    .bubble-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .bubble-sub {
+      font-size: 0.75rem;
+      color: var(--slate-400);
+    }
+
+    .bubble-msg {
+      font-size: 0.85rem;
+      color: var(--slate-200);
+      line-height: 1.5;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .mini-tag {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--indigo-100);
+    }
+
+    /* Landing Section: How It Works */
+    .landing-section {
+      padding: 5rem 0;
+    }
+
+    .section-intro {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-intro .badge {
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-desc {
+      color: var(--slate-600);
+      font-size: 1.05rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .step-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 2rem;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: all var(--transition-normal);
+    }
+
+    .step-card:hover {
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-4px);
+      border-color: var(--indigo-100);
+    }
+
+    .step-number {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--slate-100);
+      line-height: 1;
+    }
+
+    .step-icon-box {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-lg);
+      background: var(--indigo-50);
+      color: var(--indigo-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.75rem;
+    }
+
+    .step-text {
+      color: var(--slate-600);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 1.25rem;
+      background: var(--white);
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+    }
+
+    .benefit-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--violet-50);
+      color: var(--violet-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .benefit-info h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.4rem;
+    }
+
+    .benefit-info p {
+      font-size: 0.925rem;
+      color: var(--slate-600);
+      line-height: 1.5;
+    }
+
+    /* Guidelines / Safety Banner */
+    .guidelines-box {
+      background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      margin-top: 4rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .guidelines-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .guidelines-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .guideline-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .guideline-item h5 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--indigo-100);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .guideline-item p {
+      font-size: 0.85rem;
+      color: var(--slate-300);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       7. INTERACTIVE DASHBOARD VIEW
+       ========================================================================== */
+    .dashboard-container {
+      padding: 2.5rem 0 4rem;
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, var(--navy-900), var(--indigo-700));
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      color: var(--white);
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-text h2 {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .welcome-text p {
+      color: var(--indigo-100);
+      font-size: 1rem;
+    }
+
+    .welcome-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Stat Cards */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-card-info .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      line-height: 1.1;
+    }
+
+    .stat-card-info .stat-lbl {
+      font-size: 0.825rem;
+      color: var(--slate-500);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-icon.indigo { background: var(--indigo-50); color: var(--indigo-600); }
+    .stat-icon.violet { background: var(--violet-50); color: var(--violet-600); }
+    .stat-icon.emerald { background: var(--emerald-50); color: var(--emerald-500); }
+    .stat-icon.amber { background: var(--amber-100); color: var(--amber-500); }
+
+    /* Dashboard Layout Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 2rem;
+    }
+
+    .dash-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    .dash-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .dash-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Joined Communities Mini List */
+    .joined-communities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .joined-mini-card {
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      background: var(--slate-50);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .joined-mini-card:hover {
+      border-color: var(--indigo-400);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .joined-mini-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .mini-icon {
+      font-size: 1.25rem;
+    }
+
+    .joined-mini-name {
+      font-size: 0.925rem;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .joined-mini-desc {
+      font-size: 0.8rem;
+      color: var(--slate-500);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    /* Discussion Item */
+    .discussion-feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .dash-discussion-item {
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--slate-200);
+      background: var(--slate-50);
+      transition: all var(--transition-fast);
+    }
+
+    .dash-discussion-item:hover {
+      background: var(--white);
+      border-color: var(--slate-300);
+    }
+
+    .discussion-item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+
+    .discussion-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-author {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--navy-900);
+    }
+
+    .discussion-time {
+      font-size: 0.75rem;
+      color: var(--slate-400);
+    }
+
+    .discussion-item-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .discussion-item-snippet {
+      font-size: 0.85rem;
+      color: var(--slate-600);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .discussion-item-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--slate-500);
+    }
+
+    /* Recommended Communities */
+    .rec-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .rec-item:last-child {
+      border-bottom: none;
+    }
+
+    .rec-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .rec-icon {
+      font-size: 1.25rem;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--indigo-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rec-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .rec-sub {
+      font-size: 0.775rem;
+      color: var(--slate-500);
+    }
+
+    /* Discover Interests Tag Cloud */
+    .interest-tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .interactive-tag {
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.825rem;
+      font-weight: 600;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .interactive-tag:hover,
+    .interactive-tag.selected {
+      background: var(--indigo-600);
+      color: var(--white);
+      border-color: var(--indigo-600);
+      transform: scale(1.03);
+    }
+
+    /* ==========================================================================
+       8. COMMUNITIES DIRECTORY & DETAILS VIEW
+       ========================================================================== */
+    .communities-container {
+      padding: 2.5rem 0 4rem;
+    }
+
+    /* Filter Toolbar */
+    .toolbar-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.65rem 1rem 0.65rem 2.6rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--slate-200);
+      background: var(--slate-50);
+      color: var(--slate-800);
+      transition: all var(--transition-fast);
+    }
+
+    .search-input:focus {
+      background: var(--white);
+      border-color: var(--indigo-500);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--slate-400);
+      pointer-events: none;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .filter-pill {
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.825rem;
+      font-weight: 600;
+      background: var(--slate-100);
+      color: var(--slate-600);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .filter-pill:hover {
+      background: var(--slate-200);
+      color: var(--navy-900);
+    }
+
+    .filter-pill.active {
+      background: var(--navy-900);
+      color: var(--white);
+    }
+
+    /* Communities Grid */
+    .communities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .community-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .community-card:hover {
+      box-shadow: var(--shadow-xl);
+      border-color: var(--indigo-200);
+      transform: translateY(-4px);
+    }
+
+    .community-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .community-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--indigo-50), var(--violet-50));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.15);
+    }
+
+    .community-card-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+
+    .community-card-desc {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .community-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .community-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--slate-100);
+    }
+
+    .community-card-members {
+      font-size: 0.8rem;
+      color: var(--slate-500);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 500;
+    }
+
+    /* Community Detail Page View */
+    .community-detail-container {
+      padding: 2rem 0 4rem;
+    }
+
+    .breadcrumb-bar {
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--slate-600);
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+    }
+
+    .btn-back:hover {
+      color: var(--indigo-600);
+      border-color: var(--indigo-300);
+    }
+
+    .community-hero-banner {
+      background: linear-gradient(135deg, var(--navy-950), var(--navy-850));
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 2.5rem;
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .community-hero-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .community-hero-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, var(--indigo-600), var(--violet-600));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25rem;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+    }
+
+    .community-hero-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .community-hero-sub {
+      color: var(--indigo-100);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .community-detail-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    /* Message Composer */
+    .composer-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.75rem;
+    }
+
+    .composer-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .composer-textarea {
+      width: 100%;
+      min-height: 85px;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--slate-200);
+      background: var(--slate-50);
+      color: var(--slate-800);
+      resize: vertical;
+      margin-bottom: 0.75rem;
+      transition: all var(--transition-fast);
+    }
+
+    .composer-textarea:focus {
+      background: var(--white);
+      border-color: var(--indigo-500);
+    }
+
+    .composer-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .composer-hint {
+      font-size: 0.785rem;
+      color: var(--slate-500);
+    }
+
+    /* Community Feed Messages */
+    .feed-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feed-header {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--slate-100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .feed-message-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .feed-message-item {
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .feed-message-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .feed-message-content {
+      flex: 1;
+    }
+
+    .feed-author-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .feed-author-name {
+      font-weight: 700;
+      font-size: 0.925rem;
+      color: var(--navy-900);
+    }
+
+    .feed-author-role {
+      font-size: 0.75rem;
+      background: var(--slate-100);
+      padding: 0.1rem 0.45rem;
+      border-radius: var(--radius-full);
+      color: var(--slate-600);
+    }
+
+    .feed-time {
+      font-size: 0.75rem;
+      color: var(--slate-400);
+      margin-left: auto;
+    }
+
+    .feed-text {
+      font-size: 0.92rem;
+      color: var(--slate-700);
+      line-height: 1.5;
+      margin-bottom: 0.6rem;
+    }
+
+    .feed-msg-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-heart-reaction {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.775rem;
+      color: var(--slate-500);
+      background: var(--slate-100);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-full);
+    }
+
+    .btn-heart-reaction:hover,
+    .btn-heart-reaction.liked {
+      background: var(--rose-100);
+      color: var(--rose-500);
+    }
+
+    /* Community Detail Sidebar */
+    .sidebar-widget {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.75rem;
+    }
+
+    .widget-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--slate-100);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .guidelines-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .guideline-check-item {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--slate-600);
+      line-height: 1.4;
+    }
+
+    .guideline-check-icon {
+      color: var(--emerald-500);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .members-mini-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .member-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .member-info-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--navy-900);
+    }
+
+    .member-info-role {
+      font-size: 0.75rem;
+      color: var(--slate-400);
+    }
+
+    /* ==========================================================================
+       9. DOUBT SOLVING (Q&A) VIEW
+       ========================================================================== */
+    .doubts-container {
+      padding: 2.5rem 0 4rem;
+    }
+
+    .doubts-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .doubt-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      transition: all var(--transition-normal);
+    }
+
+    .doubt-card:hover {
+      border-color: var(--indigo-200);
+      box-shadow: var(--shadow-md);
+    }
+
+    .doubt-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .doubt-question-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      line-height: 1.35;
+    }
+
+    .doubt-body-text {
+      font-size: 0.95rem;
+      color: var(--slate-700);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      white-space: pre-line;
+    }
+
+    .doubt-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .doubt-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--slate-100);
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .doubt-author-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.825rem;
+      color: var(--slate-500);
+    }
+
+    .doubt-actions-cluster {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-toggle-answers {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--indigo-600);
+      background: var(--indigo-50);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-md);
+    }
+
+    .btn-toggle-answers:hover {
+      background: var(--indigo-100);
+    }
+
+    /* Expandable Answers Section */
+    .answers-container {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1.5px dashed var(--slate-200);
+      display: none;
+    }
+
+    .answers-container.open {
+      display: block;
+      animation: fadeIn 0.2s ease forwards;
+    }
+
+    .answer-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .answer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+
+    .answer-author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy-900);
+    }
+
+    .answer-text {
+      font-size: 0.92rem;
+      color: var(--slate-700);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+      white-space: pre-line;
+    }
+
+    .btn-helpful {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      background: var(--white);
+      border: 1px solid var(--slate-300);
+      color: var(--slate-600);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-helpful:hover,
+    .btn-helpful.voted {
+      background: var(--emerald-50);
+      color: var(--emerald-500);
+      border-color: var(--emerald-500);
+    }
+
+    .write-answer-box {
+      margin-top: 1.25rem;
+      background: var(--slate-50);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      border: 1px solid var(--slate-200);
+    }
+
+    /* ==========================================================================
+       10. CAMPUS ACTIVITIES VIEW
+       ========================================================================== */
+    .activities-container {
+      padding: 2.5rem 0 4rem;
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .activity-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+
+    .activity-card:hover {
+      box-shadow: var(--shadow-xl);
+      border-color: var(--indigo-200);
+      transform: translateY(-4px);
+    }
+
+    .activity-date-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--indigo-600);
+      background: var(--indigo-50);
+      padding: 0.3rem 0.7rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      align-self: flex-start;
+    }
+
+    .activity-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .activity-location {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--slate-500);
+      margin-bottom: 0.85rem;
+    }
+
+    .activity-desc {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .activity-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--slate-100);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .attendees-pill {
+      font-size: 0.8rem;
+      color: var(--slate-500);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* ==========================================================================
+       11. STUDENT PROFILES VIEW
+       ========================================================================== */
+    .profile-container {
+      padding: 2.5rem 0 4rem;
+    }
+
+    .profile-layout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 2rem;
+    }
+
+    .my-profile-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 2rem;
+      position: sticky;
+      top: 90px;
+    }
+
+    .profile-avatar-large {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-user-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .profile-user-headline {
+      font-size: 0.95rem;
+      color: var(--indigo-600);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .profile-user-bio {
+      font-size: 0.92rem;
+      color: var(--slate-600);
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+      background: var(--slate-50);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--slate-200);
+    }
+
+    .profile-info-block {
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-block-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--slate-400);
+      margin-bottom: 0.5rem;
+    }
+
+    .chips-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .profile-disclaimer-box {
+      margin-top: 1.5rem;
+      padding: 0.85rem;
+      background: var(--indigo-50);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--indigo-100);
+      font-size: 0.775rem;
+      color: var(--indigo-700);
+      line-height: 1.4;
+    }
+
+    /* Peer Student Directory */
+    .peers-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 1.75rem;
+    }
+
+    .peer-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--slate-100);
+      gap: 1rem;
+    }
+
+    .peer-item:last-child {
+      border-bottom: none;
+    }
+
+    .peer-details-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .peer-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--indigo-500), var(--violet-500));
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .peer-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .peer-sub {
+      font-size: 0.825rem;
+      color: var(--slate-500);
+      margin-bottom: 0.35rem;
+    }
+
+    .peer-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    /* ==========================================================================
+       12. MODAL DIALOGS
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(7, 13, 24, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--slate-200);
+      transform: scale(0.96) translateY(8px);
+      transition: transform var(--transition-spring);
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--slate-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .btn-modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      color: var(--slate-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-modal-close:hover {
+      background: var(--slate-100);
+      color: var(--slate-800);
+    }
+
+    .modal-body {
+      padding: 1.75rem;
+    }
+
+    .modal-footer {
+      padding: 1.25rem 1.75rem;
+      border-top: 1px solid var(--slate-100);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      background: var(--slate-50);
+      border-bottom-left-radius: var(--radius-xl);
+      border-bottom-right-radius: var(--radius-xl);
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy-900);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--slate-200);
+      background: var(--white);
+      color: var(--slate-800);
+      transition: all var(--transition-fast);
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--indigo-500);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    .form-help {
+      font-size: 0.775rem;
+      color: var(--slate-400);
+      margin-top: 0.35rem;
+    }
+
+    .form-error {
+      font-size: 0.775rem;
+      color: var(--rose-500);
+      margin-top: 0.35rem;
+      display: none;
+    }
+
+    .form-error.visible {
+      display: block;
+    }
+
+    /* Interactive Interest Toggle Pills in Modal */
+    .interest-pill-select {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .interest-selectable-chip {
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      color: var(--slate-600);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+
+    .interest-selectable-chip:hover {
+      background: var(--slate-200);
+    }
+
+    .interest-selectable-chip.active {
+      background: var(--indigo-600);
+      color: var(--white);
+      border-color: var(--indigo-600);
+    }
+
+    /* ==========================================================================
+       13. TOAST NOTIFICATIONS
+       ========================================================================== */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: var(--navy-900);
+      color: var(--white);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-xl);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 280px;
+      max-width: 380px;
+      animation: slideToast 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes slideToast {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .toast.toast-success { border-left: 4px solid var(--emerald-500); }
+    .toast.toast-info { border-left: 4px solid var(--indigo-400); }
+    .toast.toast-warning { border-left: 4px solid var(--amber-500); }
+
+    /* ==========================================================================
+       14. FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: var(--navy-950);
+      color: var(--white);
+      padding: 4.5rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-brand p {
+      color: var(--slate-400);
+      font-size: 0.925rem;
+      line-height: 1.6;
+      margin-top: 0.75rem;
+      max-width: 320px;
+    }
+
+    .footer-col h5 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .footer-links a,
+    .footer-links button {
+      font-size: 0.875rem;
+      color: var(--slate-400);
+      transition: color var(--transition-fast);
+      text-align: left;
+    }
+
+    .footer-links a:hover,
+    .footer-links button:hover {
+      color: var(--indigo-300);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.825rem;
+      color: var(--slate-500);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1.5px dashed var(--slate-200);
+      margin: 1rem 0;
+    }
+
+    .empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .empty-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .empty-text {
+      font-size: 0.875rem;
+      color: var(--slate-500);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       15. RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .hero-title {
+        font-size: 2.85rem;
+      }
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .my-profile-card {
+        position: static;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .guidelines-list {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .community-detail-layout {
+        grid-template-columns: 1fr;
+      }
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu, .header-actions .btn-profile-badge {
+        display: none;
+      }
+      .mobile-nav-toggle {
+        display: flex;
+      }
+      .hero-title {
+        font-size: 2.25rem;
+      }
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+      .joined-communities-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+      .welcome-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+      }
+      .community-hero-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#landing" class="brand-logo" onclick="app.navigate('landing')">
+        <div class="brand-icon-wrapper">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <span>Campus<span style="color: var(--indigo-400);">Connect</span></span>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <button class="nav-link active" data-view="landing" onclick="app.navigate('landing')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Home
+        </button>
+        <button class="nav-link" data-view="dashboard" onclick="app.navigate('dashboard')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
+          Dashboard
+        </button>
+        <button class="nav-link" data-view="communities" onclick="app.navigate('communities')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 21a8 8 0 0 0-16 0"></path><circle cx="10" cy="8" r="5"></circle><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path></svg>
+          Communities
+        </button>
+        <button class="nav-link" data-view="doubts" onclick="app.navigate('doubts')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          Doubt Solving
+        </button>
+        <button class="nav-link" data-view="activities" onclick="app.navigate('activities')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Activities
+        </button>
+      </nav>
+
+      <!-- Desktop User Profile Button -->
+      <div class="header-actions">
+        <button class="btn-profile-badge" onclick="app.navigate('profile')">
+          <div class="avatar-sm" id="navAvatarInitials">AR</div>
+          <span id="navUserName">Alex Rivera</span>
+        </button>
+
+        <!-- Mobile Drawer Toggle -->
+        <button class="mobile-nav-toggle" aria-label="Open mobile menu" onclick="app.toggleMobileMenu(true)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" onclick="if(event.target === this) app.toggleMobileMenu(false)">
+    <div class="mobile-drawer-content">
+      <div class="drawer-header">
+        <div class="brand-logo">
+          <div class="brand-icon-wrapper" style="width:34px;height:34px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <span style="font-size:1.1rem;">Campus Connect</span>
+        </div>
+        <button class="btn-modal-close" onclick="app.toggleMobileMenu(false)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="drawer-nav-list">
+        <button class="nav-link" data-view="landing" onclick="app.navigate('landing'); app.toggleMobileMenu(false)">Home</button>
+        <button class="nav-link" data-view="dashboard" onclick="app.navigate('dashboard'); app.toggleMobileMenu(false)">Dashboard</button>
+        <button class="nav-link" data-view="communities" onclick="app.navigate('communities'); app.toggleMobileMenu(false)">Communities</button>
+        <button class="nav-link" data-view="doubts" onclick="app.navigate('doubts'); app.toggleMobileMenu(false)">Doubt Solving</button>
+        <button class="nav-link" data-view="activities" onclick="app.navigate('activities'); app.toggleMobileMenu(false)">Activities</button>
+        <button class="nav-link" data-view="profile" onclick="app.navigate('profile'); app.toggleMobileMenu(false)">My Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MAIN VIEWS CONTAINER
+       ======================================================================== -->
+  <main class="app-main">
+
+    <!-- ======================================================================
+         VIEW 1: LANDING PAGE
+         ====================================================================== -->
+    <section id="view-landing" class="view-section active">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              <span>Your People. Your Interests. Your Campus.</span>
+            </div>
+            <h1 class="hero-title">
+              Find your circle, <br>
+              <span class="hero-title-highlight">collaborate freely</span> & thrive together.
+            </h1>
+            <p class="hero-desc">
+              Campus Connect helps college students discover like-minded friends, join verified interest clubs, clear academic doubts without judgment, and participate in low-pressure campus activities.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="app.navigate('communities')">
+                <span>Explore Communities</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+              <button class="btn btn-secondary" onclick="app.scrollToSection('how-it-works')">
+                <span>See How It Works</span>
+              </button>
+              <button class="btn btn-secondary" onclick="app.navigate('dashboard')">
+                <span>Open Dashboard</span>
+              </button>
+            </div>
+            <div class="hero-meta-stats">
+              <div class="meta-stat-item">
+                <span class="meta-stat-val">10+</span>
+                <span class="meta-stat-label">Active Communities</span>
+              </div>
+              <div class="meta-stat-item">
+                <span class="meta-stat-val">2,400+</span>
+                <span class="meta-stat-label">Sample Members</span>
+              </div>
+              <div class="meta-stat-item">
+                <span class="meta-stat-val">100%</span>
+                <span class="meta-stat-label">Zero-Pressure Space</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero CSS Illustration: Floating Cards & Peer Avatars -->
+          <div class="hero-visual">
+            <div class="hero-visual-card">
+              <div class="hero-visual-header">
+                <div style="font-weight:700; font-size: 0.95rem;">Live Campus Pulse</div>
+                <div class="active-pulse-badge">
+                  <span class="hero-pill-dot" style="background:#10b981;"></span>
+                  <span>Active Right Now</span>
+                </div>
+              </div>
+
+              <!-- Floating Card 1: Coding -->
+              <div class="bubble-card">
+                <div class="bubble-top">
+                  <div class="bubble-avatar" style="background: linear-gradient(135deg, #4f46e5, #06b6d4);">MC</div>
+                  <div>
+                    <div class="bubble-title">Maya Chen · Coding Community</div>
+                    <div class="bubble-sub">20m ago in #dsa-sprint</div>
+                  </div>
+                </div>
+                <p class="bubble-msg">"Hosting a low-stress study session in Library Room 204 for anyone prepping recursive backtracking!"</p>
+                <div class="tag-row">
+                  <span class="mini-tag">#algorithms</span>
+                  <span class="mini-tag">#collaborative</span>
+                </div>
+              </div>
+
+              <!-- Floating Card 2: Dance & Music -->
+              <div class="bubble-card">
+                <div class="bubble-top">
+                  <div class="bubble-avatar" style="background: linear-gradient(135deg, #f43f5e, #fb923c);">RS</div>
+                  <div>
+                    <div class="bubble-title">Rahul Sharma · Dance Room</div>
+                    <div class="bubble-sub">45m ago in #announcements</div>
+                  </div>
+                </div>
+                <p class="bubble-msg">"Beginners freestyle workshop this Thursday at SAC Studio 2! Absolute newbies welcome!"</p>
+                <div class="tag-row">
+                  <span class="mini-tag">#dance</span>
+                  <span class="mini-tag">#all-levels</span>
+                </div>
+              </div>
+
+              <!-- Floating Card 3: Doubt Solving -->
+              <div class="bubble-card" style="margin-bottom:0;">
+                <div class="bubble-top">
+                  <div class="bubble-avatar" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">SP</div>
+                  <div>
+                    <div class="bubble-title">Samira Patel · Doubt Solving</div>
+                    <div class="bubble-sub">Just now in #linear-algebra</div>
+                  </div>
+                </div>
+                <p class="bubble-msg">"Can someone explain eigenvalues intuitively using coordinate scaling? Thank you!"</p>
+                <div class="tag-row">
+                  <span class="mini-tag">#math</span>
+                  <span class="mini-tag">#open-doubt</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works Section -->
+      <section id="how-it-works" class="landing-section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="badge badge-indigo">Simple & Welcoming</span>
+            <h2 class="section-title">How Campus Connect Works</h2>
+            <p class="section-desc">Designed deliberately for ease of access and minimal social anxiety. Jump straight into topics you care about.</p>
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <span class="step-number">01</span>
+              <div class="step-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </div>
+              <h3 class="step-title">Discover Your Communities</h3>
+              <p class="step-text">Explore 10 curated student communities from Coding and Art to Dance, Sports, and Placement Prep. Lurk quietly or join with one click.</p>
+            </div>
+
+            <div class="step-card">
+              <span class="step-number">02</span>
+              <div class="step-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </div>
+              <h3 class="step-title">Ask Doubts & Share Ideas</h3>
+              <p class="step-text">Post your toughest coursework questions in our friendly Doubt Solving hub or jump into community conversations without fear of judgment.</p>
+            </div>
+
+            <div class="step-card">
+              <span class="step-number">03</span>
+              <div class="step-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+              </div>
+              <h3 class="step-title">RSVP to Campus Meetups</h3>
+              <p class="step-text">Join photography walks, study sessions, hackathon prep groups, and friendly jam sessions organized directly by fellow students.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Communities Preview -->
+      <section class="landing-section" style="background: var(--slate-100);">
+        <div class="container">
+          <div class="section-intro">
+            <span class="badge badge-violet">Featured Spaces</span>
+            <h2 class="section-title">Popular Hubs On Campus</h2>
+            <p class="section-desc">Get a glimpse of the most vibrant groups welcoming new members today.</p>
+          </div>
+
+          <div class="communities-grid" id="landingFeaturedCommunities">
+            <!-- Rendered dynamically by JavaScript -->
+          </div>
+
+          <div style="text-align: center; margin-top: 2.5rem;">
+            <button class="btn btn-primary" onclick="app.navigate('communities')">
+              <span>View All 10 Communities</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Benefits Showcase -->
+      <section class="landing-section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="badge badge-emerald">Community First</span>
+            <h2 class="section-title">Built For Introverts & Extroverts Alike</h2>
+            <p class="section-desc">College is immense. We make finding your close circle comfortable, organic, and friendly.</p>
+          </div>
+
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div class="benefit-info">
+                <h4>No Awkward Cold Messaging</h4>
+                <p>Interact around concrete activities, doubts, and hobbies rather than uncomfortable direct outreach. Shared context removes the awkwardness.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              </div>
+              <div class="benefit-info">
+                <h4>Real-Time Academic Lifeline</h4>
+                <p>Stuck on an assignment late at night? Post in Doubt Solving and get peer explanations from classmates who took the class previously.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="benefit-info">
+                <h4>Verified College Focus</h4>
+                <p>Clean, clutter-free campus environment dedicated exclusively to student growth, collaboration, and healthy extracurriculars.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+              </div>
+              <div class="benefit-info">
+                <h4>Effortless Project Teaming</h4>
+                <p>Find teammates for hackathons, engineering capstones, research papers, and startup prototypes with matching interests.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guidelines Box -->
+          <div class="guidelines-box">
+            <span class="badge badge-indigo" style="background: rgba(255,255,255,0.15); color: #fff;">Our Safe Campus Pledge</span>
+            <h3>Community Guidelines & Privacy</h3>
+            <p style="color: var(--slate-300); max-width: 680px; font-size: 0.95rem;">
+              Campus Connect thrives on mutual support and psychological safety. All students agree to our core guidelines:
+            </p>
+            <div class="guidelines-list">
+              <div class="guideline-item">
+                <h5>🤝 Be Respectful & Kind</h5>
+                <p>Empathy is foundational. Harsh criticism, harassment, or elitist attitudes have no place in our study groups or forums.</p>
+              </div>
+              <div class="guideline-item">
+                <h5>🌱 Welcome Beginners Warmly</h5>
+                <p>Whether someone is writing their first line of code or trying their first dance move, encourage every step forward.</p>
+              </div>
+              <div class="guideline-item">
+                <h5>🔒 Private & Locally Managed</h5>
+                <p>This demo runs completely client-side in your browser. Your edits, joined clubs, and posts stay in your local session.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 2: INTERACTIVE DASHBOARD
+         ====================================================================== -->
+    <section id="view-dashboard" class="view-section">
+      <div class="container dashboard-container">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h2>Welcome back, <span id="dashWelcomeName">Alex</span>! 👋</h2>
+            <p>Your campus is buzzing today. Here is your personalized daily roundup.</p>
+          </div>
+          <div class="welcome-actions">
+            <button class="btn btn-white btn-sm" onclick="app.openAskDoubtModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+              <span>Ask a Doubt</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="app.openCreateActivityModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="12" y1="10" x2="12" y2="16"></line><line x1="9" y1="13" x2="15" y2="13"></line></svg>
+              <span>Host Activity</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Quick Stats -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-card-info">
+              <div class="stat-num" id="statJoinedCount">3</div>
+              <div class="stat-lbl">Joined Communities</div>
+            </div>
+            <div class="stat-icon indigo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-info">
+              <div class="stat-num" id="statDoubtsCount">14</div>
+              <div class="stat-lbl">Campus Doubts Solved</div>
+            </div>
+            <div class="stat-icon violet">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-info">
+              <div class="stat-num" id="statActivitiesCount">2</div>
+              <div class="stat-lbl">Activities RSVP'd</div>
+            </div>
+            <div class="stat-icon emerald">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-info">
+              <div class="stat-num" id="statKarmaCount">320</div>
+              <div class="stat-lbl">Peer Karma Points</div>
+            </div>
+            <div class="stat-icon amber">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Layout Grid -->
+        <div class="dashboard-grid">
+          <!-- Left Column -->
+          <div class="dash-left">
+            <!-- Joined Communities Section -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  <span>Your Joined Communities</span>
+                </h3>
+                <button class="btn btn-outline btn-sm" onclick="app.navigate('communities')">Browse All</button>
+              </div>
+              <div class="joined-communities-grid" id="dashJoinedCommunitiesList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Trending Discussions Section -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                  <span>Trending Discussions</span>
+                </h3>
+                <button class="btn btn-outline btn-sm" onclick="app.navigate('communities')">View Feeds</button>
+              </div>
+              <div class="discussion-feed-list" id="dashTrendingDiscussions">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="dash-right">
+            <!-- Recommended Communities -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span>Recommended For You</span>
+                </h3>
+              </div>
+              <div id="dashRecommendedList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Upcoming Activities Mini List -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+                  <span>Upcoming This Week</span>
+                </h3>
+                <button class="btn btn-outline btn-sm" onclick="app.navigate('activities')">All</button>
+              </div>
+              <div id="dashUpcomingActivitiesList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Discover Interests Interactive Tag Cloud -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                  <span>Discover Interests</span>
+                </h3>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--slate-500); margin-bottom: 0.85rem;">Click an interest tag to filter communities instantly:</p>
+              <div class="interest-tag-cloud" id="dashInterestCloud">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 3: ALL COMMUNITIES DIRECTORY
+         ====================================================================== -->
+    <section id="view-communities" class="view-section">
+      <div class="container communities-container">
+        <div class="view-header">
+          <h2 class="view-title">Campus Communities</h2>
+          <p class="view-subtitle">Join student-run groups, share resources, participate in discussions, and meet your peers.</p>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="toolbar-bar">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="communitySearchInput" class="search-input" placeholder="Search communities by name, topic or tag..." oninput="app.filterCommunities()">
+          </div>
+
+          <div class="filter-pills" id="communityFilterPills">
+            <button class="filter-pill active" onclick="app.setCommunityCategory('All', this)">All (10)</button>
+            <button class="filter-pill" onclick="app.setCommunityCategory('Academics', this)">Academics</button>
+            <button class="filter-pill" onclick="app.setCommunityCategory('Technology', this)">Technology</button>
+            <button class="filter-pill" onclick="app.setCommunityCategory('Arts & Culture', this)">Arts & Culture</button>
+            <button class="filter-pill" onclick="app.setCommunityCategory('Recreation', this)">Recreation</button>
+            <button class="filter-pill" onclick="app.setCommunityCategory('Athletics', this)">Athletics</button>
+            <button class="filter-pill" onclick="app.setCommunityCategory('Social', this)">Social</button>
+          </div>
+        </div>
+
+        <!-- Communities Grid -->
+        <div class="communities-grid" id="allCommunitiesGrid">
+          <!-- Injected by JavaScript -->
+        </div>
+
+        <div id="noCommunitiesFound" class="empty-state" style="display: none;">
+          <div class="empty-icon">🔍</div>
+          <div class="empty-title">No communities match your search</div>
+          <div class="empty-text">Try adjusting your keyword or reset filters to explore all 10 campus communities.</div>
+          <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" onclick="app.resetCommunityFilters()">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 3.5: COMMUNITY DETAIL / ACTIVE FEED VIEW
+         ====================================================================== -->
+    <section id="view-community-detail" class="view-section">
+      <div class="container community-detail-container">
+        <div class="breadcrumb-bar">
+          <button class="btn-back" onclick="app.navigate('communities')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to All Communities</span>
+          </button>
+        </div>
+
+        <!-- Community Hero Banner -->
+        <div class="community-hero-banner" id="communityHeroBanner">
+          <div class="community-hero-left">
+            <div class="community-hero-icon" id="detailHeroIcon">💻</div>
+            <div>
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom: 0.35rem;">
+                <span class="badge badge-indigo" id="detailHeroCategory">Technology</span>
+                <span class="badge badge-slate" id="detailHeroMemberBadge">485 Members</span>
+              </div>
+              <h2 class="community-hero-title" id="detailHeroTitle">Coding Community</h2>
+              <p class="community-hero-sub" id="detailHeroDesc">Collaborate on open source, practice DSA, build hackathon projects, and ask tech questions.</p>
+            </div>
+          </div>
+          <div class="community-hero-actions">
+            <button id="detailJoinBtn" class="btn btn-primary" onclick="app.toggleJoinActiveCommunity()">
+              <span>Join Community</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Community Detail Layout -->
+        <div class="community-detail-layout">
+          <!-- Main Feed Column -->
+          <div class="community-feed-col">
+            <!-- Composer -->
+            <div class="composer-card">
+              <div class="composer-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span>Share a thought or start a discussion</span>
+              </div>
+              <textarea id="communityPostInput" class="composer-textarea" placeholder="What's happening on your mind? Ask a question, share a tip or resource..." rows="3"></textarea>
+              <div class="composer-actions">
+                <span class="composer-hint">💡 Be respectful and friendly to fellow peers.</span>
+                <button class="btn btn-primary btn-sm" onclick="app.postCommunityMessage()">
+                  <span>Post to Feed</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Feed List -->
+            <div class="feed-card">
+              <div class="feed-header">
+                <span>Discussion Feed</span>
+                <span style="font-size: 0.8rem; font-weight: 500; color: var(--slate-500);" id="feedMessageCount">3 messages</span>
+              </div>
+              <div class="feed-message-list" id="communityMessageList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar Column: Guidelines, Members & Related -->
+          <div class="community-sidebar-col">
+            <!-- Community Guidelines -->
+            <div class="sidebar-widget">
+              <h4 class="widget-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>Community Guidelines</span>
+              </h4>
+              <div class="guidelines-checklist" id="detailGuidelinesList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Sample Members -->
+            <div class="sidebar-widget">
+              <h4 class="widget-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                <span>Sample Members</span>
+              </h4>
+              <div class="members-mini-list" id="detailMembersList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Related Communities -->
+            <div class="sidebar-widget">
+              <h4 class="widget-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                <span>Related Communities</span>
+              </h4>
+              <div id="detailRelatedList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 4: DOUBT SOLVING (Q&A)
+         ====================================================================== -->
+    <section id="view-doubts" class="view-section">
+      <div class="container doubts-container">
+        <div class="doubts-action-bar">
+          <div>
+            <h2 class="view-title">Doubt Solving Hub</h2>
+            <p class="view-subtitle">Ask academic questions, help peers, and earn karma points in a judgment-free zone.</p>
+          </div>
+          <button class="btn btn-primary" onclick="app.openAskDoubtModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <span>Ask a Doubt</span>
+          </button>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="toolbar-bar">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="doubtSearchInput" class="search-input" placeholder="Search questions by keyword, topic or tag..." oninput="app.filterDoubts()">
+          </div>
+
+          <div class="filter-pills" id="doubtSubjectPills">
+            <button class="filter-pill active" onclick="app.setDoubtSubject('All', this)">All Subjects</button>
+            <button class="filter-pill" onclick="app.setDoubtSubject('Computer Science', this)">Computer Science</button>
+            <button class="filter-pill" onclick="app.setDoubtSubject('Mathematics', this)">Mathematics</button>
+            <button class="filter-pill" onclick="app.setDoubtSubject('Physics', this)">Physics</button>
+            <button class="filter-pill" onclick="app.setDoubtSubject('Electronics', this)">Electronics</button>
+          </div>
+        </div>
+
+        <!-- Questions List -->
+        <div id="doubtsListContainer">
+          <!-- Injected by JavaScript -->
+        </div>
+
+        <div id="noDoubtsFound" class="empty-state" style="display: none;">
+          <div class="empty-icon">❓</div>
+          <div class="empty-title">No questions found</div>
+          <div class="empty-text">Be the first to ask a doubt or try a different subject filter!</div>
+          <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" onclick="app.openAskDoubtModal()">Ask a Doubt</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 5: CAMPUS ACTIVITIES
+         ====================================================================== -->
+    <section id="view-activities" class="view-section">
+      <div class="container activities-container">
+        <div class="doubts-action-bar">
+          <div>
+            <h2 class="view-title">Campus Activities & Meetups</h2>
+            <p class="view-subtitle">Discover casual study groups, practice sessions, photo walks, and social hangouts.</p>
+          </div>
+          <button class="btn btn-primary" onclick="app.openCreateActivityModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="12" y1="10" x2="12" y2="16"></line><line x1="9" y1="13" x2="15" y2="13"></line></svg>
+            <span>Propose an Activity</span>
+          </button>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="toolbar-bar">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="activitySearchInput" class="search-input" placeholder="Search activities by title, location or club..." oninput="app.filterActivities()">
+          </div>
+
+          <div class="filter-pills" id="activityCategoryPills">
+            <button class="filter-pill active" onclick="app.setActivityCategory('All', this)">All Activities</button>
+            <button class="filter-pill" onclick="app.setActivityCategory('Creative', this)">Creative</button>
+            <button class="filter-pill" onclick="app.setActivityCategory('Academic', this)">Academic</button>
+            <button class="filter-pill" onclick="app.setActivityCategory('Tech', this)">Technology</button>
+            <button class="filter-pill" onclick="app.setActivityCategory('Social', this)">Social</button>
+          </div>
+        </div>
+
+        <!-- Activities Grid -->
+        <div class="activities-grid" id="activitiesGrid">
+          <!-- Injected by JavaScript -->
+        </div>
+
+        <div id="noActivitiesFound" class="empty-state" style="display: none;">
+          <div class="empty-icon">📅</div>
+          <div class="empty-title">No upcoming activities found</div>
+          <div class="empty-text">No activities currently match this filter. Why not propose a meetup yourself?</div>
+          <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" onclick="app.openCreateActivityModal()">Propose an Activity</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 6: STUDENT PROFILES
+         ====================================================================== -->
+    <section id="view-profile" class="view-section">
+      <div class="container profile-container">
+        <div class="view-header">
+          <h2 class="view-title">Student Profile & Campus Peers</h2>
+          <p class="view-subtitle">Manage your personal profile, interests, and discover fellow students on campus.</p>
+        </div>
+
+        <div class="profile-layout-grid">
+          <!-- Left: My Profile Card -->
+          <div class="my-profile-col">
+            <div class="my-profile-card">
+              <div class="profile-avatar-large" id="profileCardAvatar">AR</div>
+              <h3 class="profile-user-name" id="profileCardName">Alex Rivera</h3>
+              <div class="profile-user-headline" id="profileCardMajor">Computer Science · Sophomore (Year 2)</div>
+              <p class="profile-user-bio" id="profileCardBio">
+                "Passionate about front-end architecture, nature photography walks, and finding quiet study spots with great coffee. Always happy to pair program or collaborate!"
+              </p>
+
+              <div class="profile-info-block">
+                <div class="profile-block-label">Your Selected Interests</div>
+                <div class="chips-cluster" id="profileCardInterests">
+                  <!-- Injected by JavaScript -->
+                </div>
+              </div>
+
+              <div class="profile-info-block">
+                <div class="profile-block-label">Your Joined Communities (<span id="profileJoinedCount">3</span>)</div>
+                <div class="chips-cluster" id="profileCardJoinedBadges">
+                  <!-- Injected by JavaScript -->
+                </div>
+              </div>
+
+              <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;" onclick="app.openEditProfileModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                <span>Edit Profile & Interests</span>
+              </button>
+
+              <div class="profile-disclaimer-box">
+                ℹ️ <strong>Client-Side Demo:</strong> All profile changes are saved in your browser's local demo storage. No credentials or server sync required.
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Campus Peer Directory -->
+          <div class="peer-directory-col">
+            <div class="peers-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  <span>Discover Campus Peers</span>
+                </h3>
+                <span class="badge badge-indigo">Sample Profiles</span>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--slate-500); margin-bottom: 1rem;">
+                Connect with students who share your academic curriculum, hobby spaces, or project interests.
+              </p>
+              <div id="peerDirectoryList">
+                <!-- Injected by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL 1: ASK A DOUBT
+       ======================================================================== -->
+  <div class="modal-overlay" id="modalAskDoubt" onclick="if(event.target === this) app.closeModal('modalAskDoubt')">
+    <div class="modal-box" role="dialog" aria-labelledby="modalAskDoubtTitle">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalAskDoubtTitle">Ask an Academic Doubt</h3>
+        <button class="btn-modal-close" aria-label="Close modal" onclick="app.closeModal('modalAskDoubt')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="formAskDoubt" onsubmit="app.handleDoubtSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="doubtTitleInput">Question Title *</label>
+            <input type="text" id="doubtTitleInput" class="form-input" placeholder="e.g., How does Floyd-Warshall handle negative edge weights?" required minlength="10">
+            <div class="form-help">Be specific and descriptive so peers can assist you effectively.</div>
+            <div class="form-error" id="doubtTitleError">Please provide a descriptive title (at least 10 characters).</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="doubtSubjectSelect">Subject / Department *</label>
+            <select id="doubtSubjectSelect" class="form-select" required>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Physics">Physics</option>
+              <option value="Electronics">Electronics</option>
+              <option value="General Engineering">General Engineering</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="doubtDescInput">Detailed Explanation & What You've Tried *</label>
+            <textarea id="doubtDescInput" class="form-textarea" rows="4" placeholder="Mention the context, assignment question, or error message you encountered..." required minlength="20"></textarea>
+            <div class="form-error" id="doubtDescError">Please describe your question in detail (at least 20 characters).</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="doubtTagsInput">Tags (comma-separated)</label>
+            <input type="text" id="doubtTagsInput" class="form-input" placeholder="e.g. algorithms, graphs, homework-3">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="app.closeModal('modalAskDoubt')">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <span>Post Question</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: PROPOSE ACTIVITY
+       ======================================================================== -->
+  <div class="modal-overlay" id="modalCreateActivity" onclick="if(event.target === this) app.closeModal('modalCreateActivity')">
+    <div class="modal-box" role="dialog" aria-labelledby="modalCreateActivityTitle">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalCreateActivityTitle">Propose a Campus Activity</h3>
+        <button class="btn-modal-close" aria-label="Close modal" onclick="app.closeModal('modalCreateActivity')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="formCreateActivity" onsubmit="app.handleActivitySubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="actTitleInput">Activity Title *</label>
+            <input type="text" id="actTitleInput" class="form-input" placeholder="e.g., Weekend Badminton Friendly Matches" required minlength="6">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="actCategorySelect">Category *</label>
+            <select id="actCategorySelect" class="form-select" required>
+              <option value="Creative">Creative / Arts</option>
+              <option value="Academic">Academic / Study Session</option>
+              <option value="Tech">Technology / Coding</option>
+              <option value="Social">Social / Outdoor Hangout</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="actDateInput">Date / Day *</label>
+              <input type="text" id="actDateInput" class="form-input" placeholder="e.g., Saturday, 4:30 PM" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="actLocationInput">Location Label *</label>
+              <input type="text" id="actLocationInput" class="form-input" placeholder="e.g., Indoor Sports Complex" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="actDescInput">Description & What to Bring *</label>
+            <textarea id="actDescInput" class="form-textarea" rows="3" placeholder="Explain the plan, expected skill levels, and what to bring..." required minlength="15"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="app.closeModal('modalCreateActivity')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish Activity</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: EDIT PROFILE & INTERESTS
+       ======================================================================== -->
+  <div class="modal-overlay" id="modalEditProfile" onclick="if(event.target === this) app.closeModal('modalEditProfile')">
+    <div class="modal-box" role="dialog" aria-labelledby="modalEditProfileTitle">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalEditProfileTitle">Edit Demo Profile & Interests</h3>
+        <button class="btn-modal-close" aria-label="Close modal" onclick="app.closeModal('modalEditProfile')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="formEditProfile" onsubmit="app.handleProfileSave(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="editNameInput">Full Name *</label>
+            <input type="text" id="editNameInput" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="editMajorInput">Major / Department & Year *</label>
+            <input type="text" id="editMajorInput" class="form-input" placeholder="e.g., Computer Science · 2nd Year" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="editBioInput">Short Bio *</label>
+            <textarea id="editBioInput" class="form-textarea" rows="3" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Select Your Interests (Click to toggle)</label>
+            <div class="interest-pill-select" id="modalInterestPills">
+              <!-- Injected by JavaScript -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="app.closeModal('modalEditProfile')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TOAST CONTAINER
+       ======================================================================== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <span>Campus<span style="color: var(--indigo-400);">Connect</span></span>
+          </div>
+          <p>
+            "Your People. Your Interests. Your Campus."<br>
+            Empowering students to connect, learn, collaborate, and belong throughout their collegiate journey.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navigate</h5>
+          <div class="footer-links">
+            <button onclick="app.navigate('landing')">Home / Overview</button>
+            <button onclick="app.navigate('dashboard')">Demo Dashboard</button>
+            <button onclick="app.navigate('communities')">All Communities</button>
+            <button onclick="app.navigate('doubts')">Doubt Solving</button>
+            <button onclick="app.navigate('activities')">Campus Activities</button>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Communities</h5>
+          <div class="footer-links">
+            <button onclick="app.openCommunityDetail('coding')">Coding Community</button>
+            <button onclick="app.openCommunityDetail('dance')">Dance Room</button>
+            <button onclick="app.openCommunityDetail('doubt-solving')">Doubt Solving</button>
+            <button onclick="app.openCommunityDetail('gaming')">Gaming Lounge</button>
+            <button onclick="app.openCommunityDetail('placement')">Placement Prep</button>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Values & Safety</h5>
+          <div class="footer-links">
+            <span style="color: var(--slate-400); font-size: 0.875rem;">Anti-Bullying Code</span>
+            <span style="color: var(--slate-400); font-size: 0.875rem;">Peer Mentorship</span>
+            <span style="color: var(--slate-400); font-size: 0.875rem;">Inclusive Spaces</span>
+            <span style="color: var(--slate-400); font-size: 0.875rem;">Local Demo Storage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Campus Connect. Built with HTML, CSS, and Vanilla JavaScript.</div>
+        <div>Designed for College Students Everywhere.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       JAVASCRIPT APPLICATION CORE
+       ======================================================================== -->
+  <script>
+    /**
+     * CAMPUS CONNECT — CLIENT APPLICATION CORE
+     * Single-file architecture with reactive state, LocalStorage persistence,
+     * view routing, and zero external dependencies.
+     */
+    const app = (function () {
+      'use strict';
+
+      // ----------------------------------------------------------------------
+      // 1. DATA MODELS & INITIAL STATE
+      // ----------------------------------------------------------------------
+      const DEFAULT_COMMUNITIES = [
+        {
+          id: 'dance',
+          name: 'Dance Room',
+          category: 'Arts & Culture',
+          icon: '💃',
+          memberCount: 142,
+          desc: 'A vibrant, welcoming studio community for dancers of all levels. From hip-hop and freestyle to classical and choreography.',
+          tags: ['Hip-Hop', 'Freestyle', 'Choreography', 'Beginners Welcome'],
+          guidelines: [
+            'All skill levels are warmly celebrated — zero intimidation.',
+            'Arrive on time for studio warm-ups and wear comfortable sneakers.',
+            'Support your fellow dancers with constructive hype and encouragement.'
+          ],
+          members: [
+            { name: 'Priya Nair', role: 'Choreographer · 3rd Year', avatar: 'PN' },
+            { name: 'Marcus Bell', role: 'Freestyle Lead · 2nd Year', avatar: 'MB' },
+            { name: 'Aisha Khan', role: 'New Member · 1st Year', avatar: 'AK' }
+          ],
+          relatedIds: ['music', 'art-creativity'],
+          messages: [
+            {
+              id: 'm1',
+              author: 'Priya Nair',
+              role: 'Choreographer',
+              time: '2 hours ago',
+              text: 'Reminder: Beginner-friendly locking & popping session this Wednesday at 5 PM in SAC Studio 2! No prior experience needed!',
+              likes: 18,
+              liked: false
+            },
+            {
+              id: 'm2',
+              author: 'Marcus Bell',
+              role: 'Dance Lead',
+              time: 'Yesterday',
+              text: 'Anyone looking to enter the inter-college duet showcase? Let me know if you want to brainstorm concepts together!',
+              likes: 9,
+              liked: true
+            }
+          ]
+        },
+        {
+          id: 'doubt-solving',
+          name: 'Doubt Solving',
+          category: 'Academics',
+          icon: '💡',
+          memberCount: 310,
+          desc: 'Peer-to-peer academic support network. Ask tough assignment questions, clarify lecture concepts, and share study notes.',
+          tags: ['Math', 'Algorithms', 'Physics', 'Circuits', 'Assignments'],
+          guidelines: [
+            'Explain what you have already tried before asking for the solution.',
+            'Respect academic integrity: focus on conceptual clarity, not cheating.',
+            'Upvote clear, helpful answers to reward peer contributors.'
+          ],
+          members: [
+            { name: 'Dr. Evelyn Reed', role: 'Faculty Advisor', avatar: 'ER' },
+            { name: 'Devon Vance', role: 'Peer Tutor · 4th Year', avatar: 'DV' },
+            { name: 'Ananya Roy', role: 'Math Mentor · 3rd Year', avatar: 'AR' }
+          ],
+          relatedIds: ['coding', 'placement'],
+          messages: [
+            {
+              id: 'm3',
+              author: 'Devon Vance',
+              role: 'Peer Tutor',
+              time: '1 hour ago',
+              text: 'Pro-tip for Discrete Math: Master proof by induction with small base cases first. Happy to review any practice problems posted!',
+              likes: 24,
+              liked: false
+            }
+          ]
+        },
+        {
+          id: 'coding',
+          name: 'Coding Community',
+          category: 'Technology',
+          icon: '💻',
+          memberCount: 485,
+          desc: 'Collaborate on open source, practice LeetCode and DSA, build hackathon projects, and discuss software engineering trends.',
+          tags: ['Web Dev', 'Python', 'Algorithms', 'Open Source', 'Hackathons'],
+          guidelines: [
+            'Format code snippets cleanly using markdown formatting.',
+            'Beginners are sacred: never make anyone feel small for simple questions.',
+            'Team recruitment posts must include project stack and timeline.'
+          ],
+          members: [
+            { name: 'Maya Chen', role: 'Dev Club President', avatar: 'MC' },
+            { name: 'Leo Vance', role: 'Full Stack Dev · 3rd Year', avatar: 'LV' },
+            { name: 'Kavita Das', role: 'Junior Dev · 1st Year', avatar: 'KD' }
+          ],
+          relatedIds: ['project-collab', 'doubt-solving'],
+          messages: [
+            {
+              id: 'm4',
+              author: 'Maya Chen',
+              role: 'President',
+              time: '3 hours ago',
+              text: 'Hackathon team forming session is this Friday! If you need teammates for front-end, back-end, or UI design, leave a reply here.',
+              likes: 31,
+              liked: true
+            },
+            {
+              id: 'm5',
+              author: 'Leo Vance',
+              role: 'Full Stack Dev',
+              time: '5 hours ago',
+              text: 'Just finished writing a lightweight REST API boilerplate for our campus hackathon. Let me know if anyone wants the repository link!',
+              likes: 14,
+              liked: false
+            }
+          ]
+        },
+        {
+          id: 'gaming',
+          name: 'Gaming Lounge',
+          category: 'Recreation',
+          icon: '🎮',
+          memberCount: 260,
+          desc: 'Casual gaming sessions, campus esports scrims, board games, and friendly banter across PC, consoles, and mobile titles.',
+          tags: ['Valorant', 'Chess', 'BGMI', 'Steam', 'Console Meetups'],
+          guidelines: [
+            'Good sportsmanship at all times. Toxic behavior results in an immediate ban.',
+            'Include game rank and region when searching for party teammates.',
+            'Casual players and high-rank competitive players are both respected.'
+          ],
+          members: [
+            { name: 'Zack Taylor', role: 'Esports Captain · 3rd Year', avatar: 'ZT' },
+            { name: 'Chloe Kim', role: 'Casual Gamer · 2nd Year', avatar: 'CK' }
+          ],
+          relatedIds: ['make-friends', 'coding'],
+          messages: [
+            {
+              id: 'm6',
+              author: 'Zack Taylor',
+              role: 'Esports Captain',
+              time: '4 hours ago',
+              text: 'Custom lobby tournament planned for Saturday evening! Friendly prizes and casual casters. Sign up your 5-stack!',
+              likes: 22,
+              liked: false
+            }
+          ]
+        },
+        {
+          id: 'music',
+          name: 'Music Corner',
+          category: 'Arts & Culture',
+          icon: '🎵',
+          memberCount: 195,
+          desc: 'Acoustic jam circles, band rehearsals, songwriting, and discovering new music genres together on campus lawns.',
+          tags: ['Guitar', 'Vocals', 'Indie Rock', 'Jam Sessions', 'Production'],
+          guidelines: [
+            'Respect shared jam room equipment and pack up chords neatly.',
+            'Feedback on original music must be encouraging and empathetic.',
+            'Open jams welcome all instruments from ukulele to synthesizers.'
+          ],
+          members: [
+            { name: 'Liam O’Connor', role: 'Acoustic Lead · 3rd Year', avatar: 'LO' },
+            { name: 'Tara Joshi', role: 'Vocalist · 2nd Year', avatar: 'TJ' }
+          ],
+          relatedIds: ['dance', 'art-creativity'],
+          messages: [
+            {
+              id: 'm7',
+              author: 'Liam O’Connor',
+              role: 'Acoustic Lead',
+              time: 'Yesterday',
+              text: 'Sunset acoustic circle this Thursday at 5:30 PM under the amphitheater oak trees. Bring your guitar or just sit and listen!',
+              likes: 19,
+              liked: true
+            }
+          ]
+        },
+        {
+          id: 'art-creativity',
+          name: 'Art and Creativity',
+          category: 'Arts & Culture',
+          icon: '🎨',
+          memberCount: 160,
+          desc: 'Sketching, painting, digital illustration, origami, calligraphy, and creative design workshops for expressive minds.',
+          tags: ['Digital Art', 'Sketching', 'Watercolor', 'Crafts', 'UI/UX'],
+          guidelines: [
+            'Always credit original reference artists when sharing studies.',
+            'Constructive critiques are welcomed only when explicitly requested by the artist.',
+            'Have fun experimenting without fear of perfection.'
+          ],
+          members: [
+            { name: 'Samira Patel', role: 'Creative Director · 4th Year', avatar: 'SP' },
+            { name: 'Oscar Diaz', role: 'Illustrator · 2nd Year', avatar: 'OD' }
+          ],
+          relatedIds: ['dance', 'music'],
+          messages: [
+            {
+              id: 'm8',
+              author: 'Samira Patel',
+              role: 'Creative Director',
+              time: '6 hours ago',
+              text: 'Campus Zine Issue #4 submissions are officially open! Submit your digital sketches, photography, or micro-poems before Sunday.',
+              likes: 16,
+              liked: false
+            }
+          ]
+        },
+        {
+          id: 'placement',
+          name: 'Placement Preparation',
+          category: 'Academics',
+          icon: '💼',
+          memberCount: 520,
+          desc: 'Interview preparation, aptitude drills, resume teardowns, behavioral mock interviews, and career opportunity sharing.',
+          tags: ['Resumes', 'Aptitude', 'System Design', 'Mock Interviews', 'Internships'],
+          guidelines: [
+            'Anonymize personal contact info before sharing resumes for public review.',
+            'Share accurate interview experiences to help incoming juniors.',
+            'Keep discussions professional and supportive.'
+          ],
+          members: [
+            { name: 'Rahul Sharma', role: 'Placement Rep · 4th Year', avatar: 'RS' },
+            { name: 'Sneha Kulkarni', role: 'Incoming Analyst', avatar: 'SK' }
+          ],
+          relatedIds: ['doubt-solving', 'coding'],
+          messages: [
+            {
+              id: 'm9',
+              author: 'Rahul Sharma',
+              role: 'Placement Rep',
+              time: '1 hour ago',
+              text: 'Top tech company resumes that converted into interviews this semester had three things in common: quantified metrics, clear tech stacks, and concise 1-page length.',
+              likes: 47,
+              liked: true
+            }
+          ]
+        },
+        {
+          id: 'sports',
+          name: 'Sports Community',
+          category: 'Athletics',
+          icon: '⚽',
+          memberCount: 215,
+          desc: 'Football, basketball pick-up games, badminton ladders, morning runs, and campus athletics leagues.',
+          tags: ['Football', 'Badminton', 'Basketball', 'Morning Runs', 'Fitness'],
+          guidelines: [
+            'Fair play over winning: safety and camaraderie come first.',
+            'Clean up courts and return balls to the equipment counter.',
+            'Confirm RSVP numbers so matches can be scheduled accurately.'
+          ],
+          members: [
+            { name: 'Carlos Mendez', role: 'Sports Secretary · 3rd Year', avatar: 'CM' },
+            { name: 'Tanvi Shah', role: 'Badminton Lead · 2nd Year', avatar: 'TS' }
+          ],
+          relatedIds: ['make-friends'],
+          messages: [
+            {
+              id: 'm10',
+              author: 'Carlos Mendez',
+              role: 'Sports Secretary',
+              time: '2 hours ago',
+              text: 'Pick-up 5v5 football today at 6 PM on Main Turf. Two spots left for Team Blue! Comment if joining.',
+              likes: 12,
+              liked: false
+            }
+          ]
+        },
+        {
+          id: 'project-collab',
+          name: 'Project Collaboration',
+          category: 'Technology',
+          icon: '🚀',
+          memberCount: 340,
+          desc: 'Find teammates with complementary skills for engineering capstone projects, startup ideas, and research initiatives.',
+          tags: ['Capstones', 'Startups', 'Teammates', 'Hardware', 'UI Design'],
+          guidelines: [
+            'Clearly state project goals, needed roles, and weekly time commitment.',
+            'Honor commitments made to team members.',
+            'Open communication and equal credit for all contributors.'
+          ],
+          members: [
+            { name: 'Arjun Mehta', role: 'Hardware Tinkerer · 4th Year', avatar: 'AM' },
+            { name: 'Nina Ross', role: 'Product Designer · 3rd Year', avatar: 'NR' }
+          ],
+          relatedIds: ['coding', 'placement'],
+          messages: [
+            {
+              id: 'm11',
+              author: 'Arjun Mehta',
+              role: 'Hardware Tinkerer',
+              time: 'Yesterday',
+              text: 'Looking for a teammate experienced with Flutter or React Native to build a mobile client for an autonomous campus rover project!',
+              likes: 15,
+              liked: false
+            }
+          ]
+        },
+        {
+          id: 'make-friends',
+          name: 'Make New Friends',
+          category: 'Social',
+          icon: '☕',
+          memberCount: 410,
+          desc: 'Low-pressure, casual social space for hostelers and day scholars. Grab lunch, find study buddies, or chat about campus life.',
+          tags: ['Casual Chats', 'Campus Walks', 'Coffee Meets', 'Introvert Friendly'],
+          guidelines: [
+            'Judgment-free space: everyone here was once looking for a friend too.',
+            'No creepy or inappropriate direct messages.',
+            'Feel free to propose casual meetups like library breaks or cafeteria lunches.'
+          ],
+          members: [
+            { name: 'Fatima Zahra', role: 'Hostel Mentor · 2nd Year', avatar: 'FZ' },
+            { name: 'Kevin Tran', role: 'Campus Ambassador · 3rd Year', avatar: 'KT' }
+          ],
+          relatedIds: ['music', 'sports'],
+          messages: [
+            {
+              id: 'm12',
+              author: 'Fatima Zahra',
+              role: 'Hostel Mentor',
+              time: '3 hours ago',
+              text: 'Anyone studying at the library this afternoon want to do a 15-minute coffee break around 4 PM at the Student Center café?',
+              likes: 21,
+              liked: true
+            }
+          ]
+        }
+      ];
+
+      const DEFAULT_DOUBTS = [
+        {
+          id: 'd1',
+          title: 'How does Floyd-Warshall algorithm handle negative edge cycles?',
+          subject: 'Computer Science',
+          author: 'Kavita Das',
+          time: '3 hours ago',
+          desc: 'I understand that Floyd-Warshall calculates all-pairs shortest paths via dynamic programming. But how do we detect negative cycles? Does it show up as negative values along the diagonal dist[i][i]?',
+          tags: ['algorithms', 'dynamic-programming', 'graphs'],
+          solved: true,
+          answers: [
+            {
+              id: 'a1',
+              author: 'Devon Vance (Peer Tutor)',
+              time: '2 hours ago',
+              text: 'Yes, exactly! If after running the V iterations there exists any node i where dist[i][i] < 0, a negative cycle exists that passes through node i. Because the shortest path from a node to itself is initially 0, any reduction indicates a cycle with net negative weight.',
+              helpfulCount: 16,
+              hasVotedHelpful: false
+            }
+          ]
+        },
+        {
+          id: 'd2',
+          title: 'Intuitive geometric explanation for Eigenvalues and Eigenvectors?',
+          subject: 'Mathematics',
+          author: 'Alex Rivera',
+          time: 'Yesterday',
+          desc: 'Can someone explain eigenvectors without just writing Av = λv? When transforming a vector space with a matrix, what physically happens along the eigenvector direction?',
+          tags: ['linear-algebra', 'matrices', 'geometry'],
+          solved: true,
+          answers: [
+            {
+              id: 'a2',
+              author: 'Ananya Roy',
+              time: 'Yesterday',
+              text: 'Think of matrix multiplication as stretching and rotating 2D space. Most vectors change both their magnitude and their direction. But along eigenvectors, the direction never changes — the vector is only scaled (stretched or shrunk) by the factor λ. It acts like a stationary axis of the transformation!',
+              helpfulCount: 28,
+              hasVotedHelpful: true
+            }
+          ]
+        },
+        {
+          id: 'd3',
+          title: 'RC Circuit step response time constant derivation question',
+          subject: 'Electronics',
+          author: 'Rohan Verma',
+          time: '2 days ago',
+          desc: 'Why is τ = RC considered to reach 63.2% of final value during charging? Where does that specific 63.2% figure mathematically originate?',
+          tags: ['circuits', 'electronics', 'derivation'],
+          solved: false,
+          answers: [
+            {
+              id: 'a3',
+              author: 'Carlos Mendez',
+              time: '1 day ago',
+              text: 'The voltage formula during capacitor charging is V(t) = V_max * (1 - e^(-t / RC)). When t = RC, this evaluates to V_max * (1 - e^(-1)). Since 1/e ≈ 0.368, 1 - 0.368 = 0.632, which is 63.2%!',
+              helpfulCount: 11,
+              hasVotedHelpful: false
+            }
+          ]
+        }
+      ];
+
+      const DEFAULT_ACTIVITIES = [
+        {
+          id: 'act1',
+          title: 'Hip-Hop & Freestyle Dance Workshop',
+          category: 'Creative',
+          date: 'Wednesday · 5:00 PM',
+          location: 'SAC Studio 2 (Student Activity Center)',
+          desc: 'Beginner-friendly groove and rhythm drill session hosted by the Dance Room. Clean indoor footwear required!',
+          organizer: 'Dance Room Club',
+          attendeesCount: 24,
+          joined: true,
+          isUserCreated: false
+        },
+        {
+          id: 'act2',
+          title: 'Algorithms & LeetCode Sprint Study Group',
+          category: 'Tech',
+          date: 'Every Tuesday · 6:30 PM',
+          location: 'Computer Lab 4 / Discord Hybrid',
+          desc: 'Solve 3 curated medium problems together in small pairs with peer explanations afterwards. Zero pressure!',
+          organizer: 'Coding Community',
+          attendeesCount: 38,
+          joined: true,
+          isUserCreated: false
+        },
+        {
+          id: 'act3',
+          title: 'Campus Golden Hour Photography Walk',
+          category: 'Creative',
+          date: 'Saturday · 5:15 PM',
+          location: 'Meet at North Quad Sundial',
+          desc: 'Walk around campus botanical gardens and the reflection pond capturing golden hour light. DSLR, mirrorless, or phone cameras all welcome.',
+          organizer: 'Art & Creativity',
+          attendeesCount: 19,
+          joined: false,
+          isUserCreated: false
+        },
+        {
+          id: 'act4',
+          title: 'Discrete Mathematics Midterm Study Jam',
+          category: 'Academic',
+          date: 'Sunday · 2:00 PM',
+          location: 'Library 2nd Floor Study Room 204',
+          desc: 'Working through practice exams on Set Theory, Graph Theory, and Combinatorics with senior peer tutors available for questions.',
+          organizer: 'Doubt Solving Hub',
+          attendeesCount: 31,
+          joined: false,
+          isUserCreated: false
+        },
+        {
+          id: 'act5',
+          title: 'Hackathon Ideation & Team Pitch Night',
+          category: 'Tech',
+          date: 'Friday · 7:00 PM',
+          location: 'Engineering Hub Seminar Hall',
+          desc: 'Have an innovative app or hardware idea? Pitch it in 2 minutes and find designers and developers to build it with you this weekend.',
+          organizer: 'Project Collaboration',
+          attendeesCount: 45,
+          joined: false,
+          isUserCreated: false
+        }
+      ];
+
+      const DEFAULT_PROFILE = {
+        name: 'Alex Rivera',
+        major: 'Computer Science · Sophomore (Year 2)',
+        bio: 'Passionate about front-end architecture, nature photography walks, and finding quiet study spots with great coffee. Always happy to pair program or collaborate!',
+        avatar: 'AR',
+        interests: ['Web Development', 'Algorithms', 'Photography', 'Gaming', 'Coffee Meets'],
+        joinedCommunityIds: ['coding', 'doubt-solving', 'dance']
+      };
+
+      const ALL_AVAILABLE_INTERESTS = [
+        'Web Development', 'Algorithms', 'Machine Learning', 'UI/UX Design',
+        'Photography', 'Dance & Freestyle', 'Acoustic Guitar', 'Competitive Gaming',
+        'Badminton', 'Placement Prep', 'Open Source', 'Coffee Meets', 'Robotics'
+      ];
+
+      const SAMPLE_PEERS = [
+        {
+          name: 'Maya Chen',
+          role: 'Data Science & Software · 3rd Year',
+          avatar: 'MC',
+          tags: ['Python', 'Algorithms', 'UI/UX'],
+          matchBadge: 'Coding Community'
+        },
+        {
+          name: 'Rahul Sharma',
+          role: 'Mechanical Engineering · 4th Year',
+          avatar: 'RS',
+          tags: ['Placement Prep', 'Football', 'Robotics'],
+          matchBadge: 'Placement Rep'
+        },
+        {
+          name: 'Samira Patel',
+          role: 'Visual Communication · 2nd Year',
+          avatar: 'SP',
+          tags: ['Digital Art', 'Photography', 'Zines'],
+          matchBadge: 'Art & Creativity'
+        },
+        {
+          name: 'Liam O’Connor',
+          role: 'English Literature · 3rd Year',
+          avatar: 'LO',
+          tags: ['Acoustic Guitar', 'Indie Rock', 'Coffee Meets'],
+          matchBadge: 'Music Corner'
+        },
+        {
+          name: 'Kavita Das',
+          role: 'Computer Engineering · 1st Year',
+          avatar: 'KD',
+          tags: ['Web Dev', 'Math', 'Study Sessions'],
+          matchBadge: 'Doubt Solving'
+        }
+      ];
+
+      // ----------------------------------------------------------------------
+      // 2. LOCAL STORAGE PERSISTENCE HELPERS
+      // ----------------------------------------------------------------------
+      const STORAGE_KEY = 'campus_connect_data_v1';
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            return {
+              communities: parsed.communities || DEFAULT_COMMUNITIES,
+              doubts: parsed.doubts || DEFAULT_DOUBTS,
+              activities: parsed.activities || DEFAULT_ACTIVITIES,
+              profile: parsed.profile || DEFAULT_PROFILE
+            };
+          }
+        } catch (e) {
+          console.warn('LocalStorage unavailable or corrupted. Using defaults.', e);
+        }
+        return {
+          communities: DEFAULT_COMMUNITIES,
+          doubts: DEFAULT_DOUBTS,
+          activities: DEFAULT_ACTIVITIES,
+          profile: DEFAULT_PROFILE
+        };
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            communities: state.communities,
+            doubts: state.doubts,
+            activities: state.activities,
+            profile: state.profile
+          }));
+        } catch (e) {
+          console.warn('Unable to write to LocalStorage.', e);
+        }
+      }
+
+      const state = loadState();
+      let activeCommunityId = null;
+      let communityCategoryFilter = 'All';
+      let doubtSubjectFilter = 'All';
+      let activityCategoryFilter = 'All';
+
+      // ----------------------------------------------------------------------
+      // 3. UTILITY FUNCTIONS
+      // ----------------------------------------------------------------------
+      function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function showToast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        
+        let iconSvg = '';
+        if (type === 'success') {
+          iconSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        } else if (type === 'info') {
+          iconSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+        } else {
+          iconSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+        }
+
+        toast.innerHTML = `${iconSvg}<span>${escapeHtml(message)}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(15px)';
+          toast.style.transition = 'all 0.25s ease';
+          setTimeout(() => {
+            if (typeof toast.remove === 'function') {
+              toast.remove();
+            } else if (toast.parentNode) {
+              toast.parentNode.removeChild(toast);
+            }
+          }, 250);
+        }, 3400);
+      }
+
+      // ----------------------------------------------------------------------
+      // 4. ROUTING & VIEW NAVIGATION
+      // ----------------------------------------------------------------------
+      function navigate(viewName) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Update nav links active state
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.dataset.view === viewName) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+
+        // Toggle view visibility
+        document.querySelectorAll('.view-section').forEach(sec => {
+          sec.classList.remove('active');
+        });
+
+        const targetSection = document.getElementById(`view-${viewName}`);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
+
+        // Render contents specific to active view
+        if (viewName === 'landing') {
+          renderLandingFeatured();
+        } else if (viewName === 'dashboard') {
+          renderDashboard();
+        } else if (viewName === 'communities') {
+          renderCommunities();
+        } else if (viewName === 'doubts') {
+          renderDoubts();
+        } else if (viewName === 'activities') {
+          renderActivities();
+        } else if (viewName === 'profile') {
+          renderProfile();
+        }
+
+        // Update URL hash safely without reload
+        if (typeof window !== 'undefined' && window.history && window.history.pushState) {
+          window.history.pushState(null, null, `#${viewName}`);
+        }
+      }
+
+      function scrollToSection(elemId) {
+        const el = document.getElementById(elemId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      function toggleMobileMenu(open) {
+        const drawer = document.getElementById('mobileDrawer');
+        if (open) {
+          drawer.classList.add('open');
+        } else {
+          drawer.classList.remove('open');
+        }
+      }
+
+      // ----------------------------------------------------------------------
+      // 5. LANDING PAGE RENDERING
+      // ----------------------------------------------------------------------
+      function renderLandingFeatured() {
+        const container = document.getElementById('landingFeaturedCommunities');
+        if (!container) return;
+        const featured = state.communities.slice(0, 3);
+        
+        container.innerHTML = featured.map(c => {
+          const isJoined = state.profile.joinedCommunityIds.includes(c.id);
+          return `
+            <div class="community-card">
+              <div>
+                <div class="community-card-top">
+                  <div class="community-card-icon">${c.icon}</div>
+                  <span class="badge badge-indigo">${escapeHtml(c.category)}</span>
+                </div>
+                <h3 class="community-card-name">${escapeHtml(c.name)}</h3>
+                <p class="community-card-desc">${escapeHtml(c.desc)}</p>
+                <div class="community-card-tags">
+                  ${c.tags.slice(0, 3).map(t => `<span class="mini-tag" style="background:var(--slate-100); color:var(--slate-700);">#${escapeHtml(t)}</span>`).join('')}
+                </div>
+              </div>
+              <div class="community-card-footer">
+                <span class="community-card-members">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  ${c.memberCount} members
+                </span>
+                <button class="btn ${isJoined ? 'btn-joined' : 'btn-primary'} btn-sm" onclick="app.openCommunityDetail('${c.id}')">
+                  <span>${isJoined ? 'Joined ✓' : 'Explore'}</span>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // ----------------------------------------------------------------------
+      // 6. DASHBOARD RENDERING
+      // ----------------------------------------------------------------------
+      function renderDashboard() {
+        document.getElementById('dashWelcomeName').textContent = state.profile.name.split(' ')[0] || 'Student';
+        document.getElementById('statJoinedCount').textContent = state.profile.joinedCommunityIds.length;
+        document.getElementById('statDoubtsCount').textContent = state.doubts.length;
+        
+        const myActivitiesCount = state.activities.filter(a => a.joined).length;
+        document.getElementById('statActivitiesCount').textContent = myActivitiesCount;
+
+        // Joined Communities List
+        const joinedContainer = document.getElementById('dashJoinedCommunitiesList');
+        const joined = state.communities.filter(c => state.profile.joinedCommunityIds.includes(c.id));
+        
+        if (joined.length === 0) {
+          joinedContainer.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--slate-500); font-size: 0.9rem;">
+              You have not joined any communities yet. 
+              <br><button class="btn btn-outline btn-sm" style="margin-top: 0.75rem;" onclick="app.navigate('communities')">Explore Communities</button>
+            </div>
+          `;
+        } else {
+          joinedContainer.innerHTML = joined.map(c => `
+            <div class="joined-mini-card" onclick="app.openCommunityDetail('${c.id}')">
+              <div>
+                <div class="joined-mini-head">
+                  <span class="mini-icon">${c.icon}</span>
+                  <span class="joined-mini-name">${escapeHtml(c.name)}</span>
+                </div>
+                <p class="joined-mini-desc">${escapeHtml(c.desc.slice(0, 75))}...</p>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--indigo-600); font-weight:600;">
+                <span>${c.messages.length} recent messages</span>
+                <span>Enter →</span>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Trending Discussions
+        const trendingContainer = document.getElementById('dashTrendingDiscussions');
+        const allMsgs = [];
+        state.communities.forEach(c => {
+          c.messages.forEach(m => {
+            allMsgs.push({ ...m, communityName: c.name, communityId: c.id });
+          });
+        });
+
+        const trendingList = allMsgs.slice(0, 3);
+        trendingContainer.innerHTML = trendingList.map(m => `
+          <div class="dash-discussion-item" style="cursor: pointer;" onclick="app.openCommunityDetail('${m.communityId}')">
+            <div class="discussion-item-top">
+              <div class="discussion-meta-left">
+                <span class="discussion-author">${escapeHtml(m.author)}</span>
+                <span class="badge badge-indigo" style="font-size:0.65rem;">${escapeHtml(m.communityName)}</span>
+              </div>
+              <span class="discussion-time">${escapeHtml(m.time)}</span>
+            </div>
+            <p class="discussion-item-snippet">"${escapeHtml(m.text)}"</p>
+            <div class="discussion-item-footer">
+              <span>❤️ ${m.likes} peer reactions</span>
+              <span style="color:var(--indigo-600); font-weight:600;">Open Discussion →</span>
+            </div>
+          </div>
+        `).join('');
+
+        // Recommended Communities
+        const recContainer = document.getElementById('dashRecommendedList');
+        const unjoined = state.communities.filter(c => !state.profile.joinedCommunityIds.includes(c.id)).slice(0, 3);
+        
+        if (unjoined.length === 0) {
+          recContainer.innerHTML = `<p style="font-size: 0.85rem; color: var(--slate-500); padding: 0.5rem 0;">You're part of every campus community! Outstanding!</p>`;
+        } else {
+          recContainer.innerHTML = unjoined.map(c => `
+            <div class="rec-item">
+              <div class="rec-left">
+                <div class="rec-icon">${c.icon}</div>
+                <div>
+                  <div class="rec-title">${escapeHtml(c.name)}</div>
+                  <div class="rec-sub">${c.memberCount} members · ${escapeHtml(c.category)}</div>
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="app.toggleJoinCommunity('${c.id}', event)">Join</button>
+            </div>
+          `).join('');
+        }
+
+        // Upcoming Activities
+        const upActivitiesContainer = document.getElementById('dashUpcomingActivitiesList');
+        const upActs = state.activities.slice(0, 2);
+        upActivitiesContainer.innerHTML = upActs.map(a => `
+          <div style="padding: 0.75rem 0; border-bottom: 1px solid var(--slate-100);">
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--navy-900);">${escapeHtml(a.title)}</div>
+            <div style="font-size: 0.8rem; color: var(--slate-500); margin-top: 0.2rem;">📍 ${escapeHtml(a.location)}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 0.4rem;">
+              <span style="font-size: 0.75rem; color: var(--indigo-600); font-weight:600;">${escapeHtml(a.date)}</span>
+              <button class="btn ${a.joined ? 'btn-joined' : 'btn-outline'} btn-sm" onclick="app.toggleActivityRSVP('${a.id}')">
+                ${a.joined ? 'RSVP’d ✓' : 'RSVP'}
+              </button>
+            </div>
+          </div>
+        `).join('');
+
+        // Discover Interests Tag Cloud
+        const cloudContainer = document.getElementById('dashInterestCloud');
+        cloudContainer.innerHTML = ALL_AVAILABLE_INTERESTS.map(tag => `
+          <button class="interactive-tag ${state.profile.interests.includes(tag) ? 'selected' : ''}" onclick="app.filterByInterestTag('${tag}')">
+            #${escapeHtml(tag)}
+          </button>
+        `).join('');
+      }
+
+      function filterByInterestTag(tag) {
+        navigate('communities');
+        const searchInput = document.getElementById('communitySearchInput');
+        if (searchInput) {
+          searchInput.value = tag;
+          filterCommunities();
+        }
+      }
+
+      // ----------------------------------------------------------------------
+      // 7. COMMUNITIES DIRECTORY
+      // ----------------------------------------------------------------------
+      function renderCommunities() {
+        const grid = document.getElementById('allCommunitiesGrid');
+        const noFound = document.getElementById('noCommunitiesFound');
+        const query = (document.getElementById('communitySearchInput')?.value || '').toLowerCase().trim();
+
+        const filtered = state.communities.filter(c => {
+          const matchCat = communityCategoryFilter === 'All' || c.category === communityCategoryFilter;
+          const matchQuery = !query || 
+            c.name.toLowerCase().includes(query) ||
+            c.desc.toLowerCase().includes(query) ||
+            c.tags.some(t => t.toLowerCase().includes(query));
+          return matchCat && matchQuery;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '';
+          noFound.style.display = 'block';
+          return;
+        }
+
+        noFound.style.display = 'none';
+        grid.innerHTML = filtered.map(c => {
+          const isJoined = state.profile.joinedCommunityIds.includes(c.id);
+          return `
+            <div class="community-card">
+              <div>
+                <div class="community-card-top">
+                  <div class="community-card-icon">${c.icon}</div>
+                  <span class="badge badge-indigo">${escapeHtml(c.category)}</span>
+                </div>
+                <h3 class="community-card-name">${escapeHtml(c.name)}</h3>
+                <p class="community-card-desc">${escapeHtml(c.desc)}</p>
+                <div class="community-card-tags">
+                  ${c.tags.map(t => `<span class="mini-tag" style="background:var(--slate-100); color:var(--slate-700);">#${escapeHtml(t)}</span>`).join('')}
+                </div>
+              </div>
+
+              <div class="community-card-footer">
+                <span class="community-card-members">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  ${c.memberCount} members
+                </span>
+                <div style="display:flex; gap:0.5rem;">
+                  <button class="btn ${isJoined ? 'btn-joined' : 'btn-outline'} btn-sm" onclick="app.toggleJoinCommunity('${c.id}', event)">
+                    ${isJoined ? 'Joined ✓' : 'Join'}
+                  </button>
+                  <button class="btn btn-primary btn-sm" onclick="app.openCommunityDetail('${c.id}')">
+                    <span>Enter</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function filterCommunities() {
+        renderCommunities();
+      }
+
+      function setCommunityCategory(cat, btn) {
+        communityCategoryFilter = cat;
+        document.querySelectorAll('#communityFilterPills .filter-pill').forEach(p => p.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        renderCommunities();
+      }
+
+      function resetCommunityFilters() {
+        const input = document.getElementById('communitySearchInput');
+        if (input) input.value = '';
+        communityCategoryFilter = 'All';
+        const pills = document.querySelectorAll('#communityFilterPills .filter-pill');
+        pills.forEach((p, idx) => {
+          if (idx === 0) p.classList.add('active');
+          else p.classList.remove('active');
+        });
+        renderCommunities();
+      }
+
+      function toggleJoinCommunity(id, ev) {
+        if (ev) ev.stopPropagation();
+        const index = state.profile.joinedCommunityIds.indexOf(id);
+        const comm = state.communities.find(c => c.id === id);
+
+        if (index > -1) {
+          state.profile.joinedCommunityIds.splice(index, 1);
+          if (comm) comm.memberCount = Math.max(0, comm.memberCount - 1);
+          showToast(`Left ${comm ? comm.name : 'community'}.`, 'info');
+        } else {
+          state.profile.joinedCommunityIds.push(id);
+          if (comm) comm.memberCount += 1;
+          showToast(`Joined ${comm ? comm.name : 'community'}! 🎉`, 'success');
+        }
+
+        saveState();
+        renderCommunities();
+        updateNavUser();
+      }
+
+      // ----------------------------------------------------------------------
+      // 8. COMMUNITY DETAIL VIEW & FEED
+      // ----------------------------------------------------------------------
+      function openCommunityDetail(id) {
+        activeCommunityId = id;
+        const comm = state.communities.find(c => c.id === id);
+        if (!comm) return;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Switch to detail section
+        document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById('view-community-detail').classList.add('active');
+
+        // Populate Hero
+        document.getElementById('detailHeroIcon').textContent = comm.icon;
+        document.getElementById('detailHeroTitle').textContent = comm.name;
+        document.getElementById('detailHeroCategory').textContent = comm.category;
+        document.getElementById('detailHeroMemberBadge').textContent = `${comm.memberCount} Members`;
+        document.getElementById('detailHeroDesc').textContent = comm.desc;
+
+        const isJoined = state.profile.joinedCommunityIds.includes(comm.id);
+        const joinBtn = document.getElementById('detailJoinBtn');
+        if (isJoined) {
+          joinBtn.className = 'btn btn-joined';
+          joinBtn.innerHTML = '<span>Joined ✓ (Click to Leave)</span>';
+        } else {
+          joinBtn.className = 'btn btn-primary';
+          joinBtn.innerHTML = '<span>Join Community</span>';
+        }
+
+        // Render Guidelines
+        const guidelinesList = document.getElementById('detailGuidelinesList');
+        guidelinesList.innerHTML = comm.guidelines.map(g => `
+          <div class="guideline-check-item">
+            <svg class="guideline-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>${escapeHtml(g)}</span>
+          </div>
+        `).join('');
+
+        // Render Sample Members
+        const membersList = document.getElementById('detailMembersList');
+        membersList.innerHTML = comm.members.map(m => `
+          <div class="member-row">
+            <div class="avatar-sm" style="background: linear-gradient(135deg, #6366f1, #a855f7);">${m.avatar}</div>
+            <div>
+              <div class="member-info-name">${escapeHtml(m.name)}</div>
+              <div class="member-info-role">${escapeHtml(m.role)}</div>
+            </div>
+          </div>
+        `).join('');
+
+        // Render Related Communities
+        const relatedList = document.getElementById('detailRelatedList');
+        const related = state.communities.filter(c => comm.relatedIds && comm.relatedIds.includes(c.id));
+        relatedList.innerHTML = related.map(rc => `
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 0; border-bottom:1px solid var(--slate-100);">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span>${rc.icon}</span>
+              <span style="font-size:0.875rem; font-weight:600; color:var(--navy-900);">${escapeHtml(rc.name)}</span>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="app.openCommunityDetail('${rc.id}')">View</button>
+          </div>
+        `).join('');
+
+        renderCommunityMessages(comm);
+      }
+
+      function toggleJoinActiveCommunity() {
+        if (!activeCommunityId) return;
+        toggleJoinCommunity(activeCommunityId);
+        openCommunityDetail(activeCommunityId);
+      }
+
+      function renderCommunityMessages(comm) {
+        const msgList = document.getElementById('communityMessageList');
+        const countBadge = document.getElementById('feedMessageCount');
+        countBadge.textContent = `${comm.messages.length} message${comm.messages.length === 1 ? '' : 's'}`;
+
+        if (comm.messages.length === 0) {
+          msgList.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--slate-500); font-size: 0.9rem;">
+              No messages yet in this community. Be the first to start the conversation!
+            </div>
+          `;
+          return;
+        }
+
+        msgList.innerHTML = comm.messages.map(m => `
+          <div class="feed-message-item">
+            <div class="avatar-sm" style="flex-shrink:0;">${m.author.split(' ').map(n=>n[0]).join('')}</div>
+            <div class="feed-message-content">
+              <div class="feed-author-line">
+                <span class="feed-author-name">${escapeHtml(m.author)}</span>
+                <span class="feed-author-role">${escapeHtml(m.role || 'Member')}</span>
+                <span class="feed-time">${escapeHtml(m.time)}</span>
+              </div>
+              <p class="feed-text">${escapeHtml(m.text)}</p>
+              <div class="feed-msg-actions">
+                <button class="btn-heart-reaction ${m.liked ? 'liked' : ''}" onclick="app.toggleLikeMessage('${comm.id}', '${m.id}')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="${m.liked ? '#f43f5e' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <span>${m.likes}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function postCommunityMessage() {
+        if (!activeCommunityId) return;
+        const input = document.getElementById('communityPostInput');
+        const text = (input?.value || '').trim();
+
+        if (!text) {
+          showToast('Please type a message before posting.', 'warning');
+          return;
+        }
+
+        const comm = state.communities.find(c => c.id === activeCommunityId);
+        if (!comm) return;
+
+        const newMsg = {
+          id: 'msg_' + Date.now(),
+          author: state.profile.name,
+          role: 'Student Member',
+          time: 'Just now',
+          text: text,
+          likes: 1,
+          liked: true
+        };
+
+        comm.messages.unshift(newMsg);
+        input.value = '';
+        saveState();
+        renderCommunityMessages(comm);
+        showToast('Message posted to community feed! 🚀', 'success');
+      }
+
+      function toggleLikeMessage(commId, msgId) {
+        const comm = state.communities.find(c => c.id === commId);
+        if (!comm) return;
+        const msg = comm.messages.find(m => m.id === msgId);
+        if (!msg) return;
+
+        if (msg.liked) {
+          msg.liked = false;
+          msg.likes = Math.max(0, msg.likes - 1);
+        } else {
+          msg.liked = true;
+          msg.likes += 1;
+        }
+
+        saveState();
+        renderCommunityMessages(comm);
+      }
+
+      // ----------------------------------------------------------------------
+      // 9. DOUBT SOLVING (ACADEMIC Q&A)
+      // ----------------------------------------------------------------------
+      function renderDoubts() {
+        const container = document.getElementById('doubtsListContainer');
+        const noFound = document.getElementById('noDoubtsFound');
+        const query = (document.getElementById('doubtSearchInput')?.value || '').toLowerCase().trim();
+
+        const filtered = state.doubts.filter(d => {
+          const matchSub = doubtSubjectFilter === 'All' || d.subject === doubtSubjectFilter;
+          const matchQuery = !query ||
+            d.title.toLowerCase().includes(query) ||
+            d.desc.toLowerCase().includes(query) ||
+            d.tags.some(t => t.toLowerCase().includes(query));
+          return matchSub && matchQuery;
+        });
+
+        if (filtered.length === 0) {
+          container.innerHTML = '';
+          noFound.style.display = 'block';
+          return;
+        }
+
+        noFound.style.display = 'none';
+        container.innerHTML = filtered.map(d => `
+          <div class="doubt-card">
+            <div class="doubt-card-top">
+              <div>
+                <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom: 0.4rem;">
+                  <span class="badge badge-indigo">${escapeHtml(d.subject)}</span>
+                  ${d.solved ? '<span class="badge badge-emerald">Solved ✓</span>' : '<span class="badge badge-amber">Open Question</span>'}
+                </div>
+                <h3 class="doubt-question-title">${escapeHtml(d.title)}</h3>
+              </div>
+            </div>
+
+            <p class="doubt-body-text">${escapeHtml(d.desc)}</p>
+
+            <div class="doubt-tags">
+              ${d.tags.map(t => `<span class="mini-tag" style="background:var(--slate-100); color:var(--slate-700);">#${escapeHtml(t)}</span>`).join('')}
+            </div>
+
+            <div class="doubt-footer">
+              <div class="doubt-author-meta">
+                <div class="avatar-sm" style="width:26px; height:26px; font-size:0.7rem;">${d.author.split(' ').map(n=>n[0]).join('')}</div>
+                <span>Asked by <strong>${escapeHtml(d.author)}</strong> · ${escapeHtml(d.time)}</span>
+              </div>
+
+              <div class="doubt-actions-cluster">
+                <button class="btn-toggle-answers" onclick="app.toggleAnswersSection('${d.id}')">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                  <span>${d.answers.length} Answer${d.answers.length === 1 ? '' : 's'}</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Expandable Answers Container -->
+            <div class="answers-container" id="answers-for-${d.id}">
+              <div style="font-size: 0.95rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.75rem;">
+                Peer Answers (${d.answers.length})
+              </div>
+
+              ${d.answers.length === 0 ? '<div style="color:var(--slate-500); font-size:0.875rem; margin-bottom:1rem;">No answers yet. Be the first to explain!</div>' : ''}
+
+              ${d.answers.map(ans => `
+                <div class="answer-item">
+                  <div class="answer-top">
+                    <div class="answer-author">
+                      <div class="avatar-sm" style="width:24px; height:24px; font-size:0.65rem; background:#4f46e5;">${ans.author.split(' ').map(n=>n[0]).join('')}</div>
+                      <span>${escapeHtml(ans.author)}</span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--slate-400);">${escapeHtml(ans.time)}</span>
+                  </div>
+                  <p class="answer-text">${escapeHtml(ans.text)}</p>
+                  <button class="btn-helpful ${ans.hasVotedHelpful ? 'voted' : ''}" onclick="app.voteAnswerHelpful('${d.id}', '${ans.id}')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>Helpful (${ans.helpfulCount})</span>
+                  </button>
+                </div>
+              `).join('')}
+
+              <!-- Write Answer Box -->
+              <div class="write-answer-box">
+                <label style="display:block; font-size:0.825rem; font-weight:600; color:var(--navy-900); margin-bottom:0.35rem;">Post an Answer / Explanation</label>
+                <textarea id="reply-input-${d.id}" class="composer-textarea" rows="2" placeholder="Write a step-by-step peer explanation..."></textarea>
+                <div style="display:flex; justify-content:flex-end;">
+                  <button class="btn btn-primary btn-sm" onclick="app.submitAnswer('${d.id}')">Submit Answer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function filterDoubts() {
+        renderDoubts();
+      }
+
+      function setDoubtSubject(subj, btn) {
+        doubtSubjectFilter = subj;
+        document.querySelectorAll('#doubtSubjectPills .filter-pill').forEach(p => p.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        renderDoubts();
+      }
+
+      function toggleAnswersSection(doubtId) {
+        const sec = document.getElementById(`answers-for-${doubtId}`);
+        if (sec) {
+          sec.classList.toggle('open');
+        }
+      }
+
+      function voteAnswerHelpful(doubtId, answerId) {
+        const doubt = state.doubts.find(d => d.id === doubtId);
+        if (!doubt) return;
+        const ans = doubt.answers.find(a => a.id === answerId);
+        if (!ans) return;
+
+        if (ans.hasVotedHelpful) {
+          ans.hasVotedHelpful = false;
+          ans.helpfulCount = Math.max(0, ans.helpfulCount - 1);
+        } else {
+          ans.hasVotedHelpful = true;
+          ans.helpfulCount += 1;
+          showToast('Marked as helpful! Thanks for encouraging peer help.', 'success');
+        }
+
+        saveState();
+        renderDoubts();
+        // Keep answer section open
+        const sec = document.getElementById(`answers-for-${doubtId}`);
+        if (sec) sec.classList.add('open');
+      }
+
+      function submitAnswer(doubtId) {
+        const input = document.getElementById(`reply-input-${doubtId}`);
+        const text = (input?.value || '').trim();
+
+        if (!text) {
+          showToast('Please type an answer before submitting.', 'warning');
+          return;
+        }
+
+        const doubt = state.doubts.find(d => d.id === doubtId);
+        if (!doubt) return;
+
+        const newAns = {
+          id: 'ans_' + Date.now(),
+          author: state.profile.name,
+          time: 'Just now',
+          text: text,
+          helpfulCount: 1,
+          hasVotedHelpful: true
+        };
+
+        doubt.answers.push(newAns);
+        doubt.solved = true;
+        saveState();
+        renderDoubts();
+
+        const sec = document.getElementById(`answers-for-${doubtId}`);
+        if (sec) sec.classList.add('open');
+        showToast('Your answer has been published! 🌟', 'success');
+      }
+
+      function openAskDoubtModal() {
+        document.getElementById('modalAskDoubt').classList.add('open');
+        document.getElementById('doubtTitleInput').focus();
+      }
+
+      function handleDoubtSubmit(event) {
+        event.preventDefault();
+        const title = document.getElementById('doubtTitleInput').value.trim();
+        const subject = document.getElementById('doubtSubjectSelect').value;
+        const desc = document.getElementById('doubtDescInput').value.trim();
+        const tagsRaw = document.getElementById('doubtTagsInput').value.trim();
+
+        if (title.length < 10) {
+          document.getElementById('doubtTitleError').classList.add('visible');
+          return;
+        } else {
+          document.getElementById('doubtTitleError').classList.remove('visible');
+        }
+
+        if (desc.length < 20) {
+          document.getElementById('doubtDescError').classList.add('visible');
+          return;
+        } else {
+          document.getElementById('doubtDescError').classList.remove('visible');
+        }
+
+        const tags = tagsRaw
+          ? tagsRaw.split(',').map(t => t.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '')).filter(Boolean)
+          : ['question', subject.toLowerCase().replace(/\s+/g, '-')];
+
+        const newDoubt = {
+          id: 'doubt_' + Date.now(),
+          title: title,
+          subject: subject,
+          author: state.profile.name,
+          time: 'Just now',
+          desc: desc,
+          tags: tags,
+          solved: false,
+          answers: []
+        };
+
+        state.doubts.unshift(newDoubt);
+        saveState();
+
+        document.getElementById('formAskDoubt').reset();
+        closeModal('modalAskDoubt');
+        navigate('doubts');
+        showToast('Your doubt was posted successfully! 💡', 'success');
+      }
+
+      // ----------------------------------------------------------------------
+      // 10. CAMPUS ACTIVITIES
+      // ----------------------------------------------------------------------
+      function renderActivities() {
+        const grid = document.getElementById('activitiesGrid');
+        const noFound = document.getElementById('noActivitiesFound');
+        const query = (document.getElementById('activitySearchInput')?.value || '').toLowerCase().trim();
+
+        const filtered = state.activities.filter(a => {
+          const matchCat = activityCategoryFilter === 'All' || a.category === activityCategoryFilter;
+          const matchQuery = !query ||
+            a.title.toLowerCase().includes(query) ||
+            a.location.toLowerCase().includes(query) ||
+            a.desc.toLowerCase().includes(query);
+          return matchCat && matchQuery;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '';
+          noFound.style.display = 'block';
+          return;
+        }
+
+        noFound.style.display = 'none';
+        grid.innerHTML = filtered.map(a => `
+          <div class="activity-card">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="activity-date-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+                  <span>${escapeHtml(a.date)}</span>
+                </div>
+                ${a.isUserCreated ? '<span class="badge badge-emerald">Created by You</span>' : `<span class="badge badge-indigo">${escapeHtml(a.category)}</span>`}
+              </div>
+
+              <h3 class="activity-card-title">${escapeHtml(a.title)}</h3>
+              <div class="activity-location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>${escapeHtml(a.location)}</span>
+              </div>
+              <p class="activity-desc">${escapeHtml(a.desc)}</p>
+            </div>
+
+            <div class="activity-card-footer">
+              <span class="attendees-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                ${a.attendeesCount} students attending
+              </span>
+              <button class="btn ${a.joined ? 'btn-joined' : 'btn-primary'} btn-sm" onclick="app.toggleActivityRSVP('${a.id}')">
+                ${a.joined ? 'RSVP’d ✓ (Cancel)' : 'Join Activity'}
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function filterActivities() {
+        renderActivities();
+      }
+
+      function setActivityCategory(cat, btn) {
+        activityCategoryFilter = cat;
+        document.querySelectorAll('#activityCategoryPills .filter-pill').forEach(p => p.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        renderActivities();
+      }
+
+      function toggleActivityRSVP(actId) {
+        const act = state.activities.find(a => a.id === actId);
+        if (!act) return;
+
+        if (act.joined) {
+          act.joined = false;
+          act.attendeesCount = Math.max(0, act.attendeesCount - 1);
+          showToast(`Cancelled RSVP for "${act.title}".`, 'info');
+        } else {
+          act.joined = true;
+          act.attendeesCount += 1;
+          showToast(`RSVP Confirmed for "${act.title}"! See you there 🎉`, 'success');
+        }
+
+        saveState();
+        renderActivities();
+        if (document.getElementById('view-dashboard').classList.contains('active')) {
+          renderDashboard();
+        }
+      }
+
+      function openCreateActivityModal() {
+        document.getElementById('modalCreateActivity').classList.add('open');
+        document.getElementById('actTitleInput').focus();
+      }
+
+      function handleActivitySubmit(event) {
+        event.preventDefault();
+        const title = document.getElementById('actTitleInput').value.trim();
+        const category = document.getElementById('actCategorySelect').value;
+        const date = document.getElementById('actDateInput').value.trim();
+        const location = document.getElementById('actLocationInput').value.trim();
+        const desc = document.getElementById('actDescInput').value.trim();
+
+        const newActivity = {
+          id: 'act_' + Date.now(),
+          title: title,
+          category: category,
+          date: date,
+          location: location,
+          desc: desc,
+          organizer: state.profile.name,
+          attendeesCount: 1,
+          joined: true,
+          isUserCreated: true
+        };
+
+        state.activities.unshift(newActivity);
+        saveState();
+
+        document.getElementById('formCreateActivity').reset();
+        closeModal('modalCreateActivity');
+        navigate('activities');
+        showToast('Campus Activity proposed successfully! 📅', 'success');
+      }
+
+      // ----------------------------------------------------------------------
+      // 11. STUDENT PROFILE
+      // ----------------------------------------------------------------------
+      function renderProfile() {
+        document.getElementById('profileCardName').textContent = state.profile.name;
+        document.getElementById('profileCardAvatar').textContent = state.profile.avatar || 'ST';
+        document.getElementById('profileCardMajor').textContent = state.profile.major;
+        document.getElementById('profileCardBio').textContent = `"${state.profile.bio}"`;
+        document.getElementById('profileJoinedCount').textContent = state.profile.joinedCommunityIds.length;
+
+        // Render Interests
+        const interestsContainer = document.getElementById('profileCardInterests');
+        interestsContainer.innerHTML = state.profile.interests.map(int => `
+          <span class="mini-tag" style="background:var(--indigo-50); color:var(--indigo-600); font-weight:600; font-size:0.8rem; padding:0.25rem 0.65rem;">
+            ${escapeHtml(int)}
+          </span>
+        `).join('');
+
+        // Render Joined Communities Badges
+        const joinedContainer = document.getElementById('profileCardJoinedBadges');
+        const joined = state.communities.filter(c => state.profile.joinedCommunityIds.includes(c.id));
+        joinedContainer.innerHTML = joined.map(c => `
+          <button class="mini-tag" style="background:var(--slate-100); color:var(--navy-900); font-size:0.8rem; cursor:pointer;" onclick="app.openCommunityDetail('${c.id}')">
+            ${c.icon} ${escapeHtml(c.name)}
+          </button>
+        `).join('');
+
+        // Render Peer Directory
+        const peerContainer = document.getElementById('peerDirectoryList');
+        peerContainer.innerHTML = SAMPLE_PEERS.map(p => `
+          <div class="peer-item">
+            <div class="peer-details-left">
+              <div class="peer-avatar">${p.avatar}</div>
+              <div>
+                <div class="peer-name">${escapeHtml(p.name)}</div>
+                <div class="peer-sub">${escapeHtml(p.role)}</div>
+                <div class="peer-tags">
+                  ${p.tags.map(t => `<span class="mini-tag" style="font-size:0.7rem; background:var(--slate-100); color:var(--slate-600);">#${escapeHtml(t)}</span>`).join('')}
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="app.sendPeerGreeting('${p.name}')">
+              <span>Wave 👋</span>
+            </button>
+          </div>
+        `).join('');
+      }
+
+      function sendPeerGreeting(name) {
+        showToast(`Waved hello to ${name}! Friendly greetings sent. 👋`, 'info');
+      }
+
+      function openEditProfileModal() {
+        document.getElementById('editNameInput').value = state.profile.name;
+        document.getElementById('editMajorInput').value = state.profile.major;
+        document.getElementById('editBioInput').value = state.profile.bio;
+
+        const pillsContainer = document.getElementById('modalInterestPills');
+        pillsContainer.innerHTML = ALL_AVAILABLE_INTERESTS.map(int => {
+          const isSelected = state.profile.interests.includes(int);
+          return `
+            <div class="interest-selectable-chip ${isSelected ? 'active' : ''}" onclick="this.classList.toggle('active')">
+              ${escapeHtml(int)}
+            </div>
+          `;
+        }).join('');
+
+        document.getElementById('modalEditProfile').classList.add('open');
+      }
+
+      function handleProfileSave(event) {
+        event.preventDefault();
+        const name = document.getElementById('editNameInput').value.trim();
+        const major = document.getElementById('editMajorInput').value.trim();
+        const bio = document.getElementById('editBioInput').value.trim();
+
+        const selectedPills = Array.from(document.querySelectorAll('#modalInterestPills .interest-selectable-chip.active'))
+          .map(el => el.textContent.trim());
+
+        state.profile.name = name;
+        state.profile.major = major;
+        state.profile.bio = bio;
+        state.profile.interests = selectedPills.length > 0 ? selectedPills : ['Campus Connect'];
+        state.profile.avatar = name.split(' ').map(n=>n[0]).join('').slice(0, 2).toUpperCase() || 'ST';
+
+        saveState();
+        closeModal('modalEditProfile');
+        renderProfile();
+        updateNavUser();
+        showToast('Profile and interests updated! 🎉', 'success');
+      }
+
+      function updateNavUser() {
+        const initialsEl = document.getElementById('navAvatarInitials');
+        const nameEl = document.getElementById('navUserName');
+        if (initialsEl) initialsEl.textContent = state.profile.avatar || 'ST';
+        if (nameEl) nameEl.textContent = state.profile.name;
+      }
+
+      // ----------------------------------------------------------------------
+      // 12. MODAL CONTROLS & KEYBOARD LISTENERS
+      // ----------------------------------------------------------------------
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.remove('open');
+      }
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+          toggleMobileMenu(false);
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // 13. INITIALIZATION
+      // ----------------------------------------------------------------------
+      function init() {
+        updateNavUser();
+        
+        // Handle hash navigation
+        const initialHash = window.location.hash.replace('#', '');
+        if (['landing', 'dashboard', 'communities', 'doubts', 'activities', 'profile'].includes(initialHash)) {
+          navigate(initialHash);
+        } else {
+          navigate('landing');
+        }
+      }
+
+      // Public API
+      return {
+        init,
+        navigate,
+        scrollToSection,
+        toggleMobileMenu,
+        filterCommunities,
+        setCommunityCategory,
+        resetCommunityFilters,
+        toggleJoinCommunity,
+        openCommunityDetail,
+        toggleJoinActiveCommunity,
+        postCommunityMessage,
+        toggleLikeMessage,
+        filterDoubts,
+        setDoubtSubject,
+        toggleAnswersSection,
+        voteAnswerHelpful,
+        submitAnswer,
+        openAskDoubtModal,
+        handleDoubtSubmit,
+        filterActivities,
+        setActivityCategory,
+        toggleActivityRSVP,
+        openCreateActivityModal,
+        handleActivitySubmit,
+        filterByInterestTag,
+        openEditProfileModal,
+        handleProfileSave,
+        sendPeerGreeting,
+        closeModal
+      };
+    })();
+    window.app = app;
+
+    // Initialize application on DOM ready
+    document.addEventListener('DOMContentLoaded', app.init);
+  </script>
+</body>
+</html>
